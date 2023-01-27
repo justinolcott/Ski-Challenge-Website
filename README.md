@@ -1,7 +1,8 @@
 # startup
 # Ski Website
 
-The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts!
+**Elevator Pitch:**
+The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts! Make the best days skiing with this ski website!
 
 - provides basic ski resort information such as: 
     - weather
