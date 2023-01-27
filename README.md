@@ -1,5 +1,8 @@
 # startup
 # Ski Website
+
+    The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts!
+
 - provides basic ski resort information such as: 
     - weather
     - lift status
@@ -17,9 +20,6 @@
     - vote on what time
     - coordinate carpooling
 
-```
-    The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts!
-```
 This [mock website](https://sites.google.com/view/skiwebsite/favorite-resorts?authuser=0) was created using Google Sites to get a basic layout and flow.
 ![Favorite Resorts Page](/assets/images/Resorts.png)
 ![Conditions Page](/assets/images/Conditions.png)
