@@ -66,3 +66,13 @@ I still need to learn more about [markdown files](https://docs.github.com/en/get
 
 ### CodePen Notes - 26 Jan 2023
 [My CodePen](https://codepen.io/justinolcott)
+
+### Amazon EC2 Notes
+- Use EC2 to create webservers
+- T3 nano has a cost of $0.0052 / hour which is very inexpensive
+- The IP Address will change unless you get an elastic IP address which costs money while the server is inactive, but is fairly cheap.
+
+### Amazon Route 53 Notes
+- You can buy domain names through Amazon. .link and .click are the cheapest, but .click has no privacy protection
+- You can connect that to an IP through Route 53 - Hosted Zones
+    - add two records (one blank, one with *) to direct all subdomains to the main page.
