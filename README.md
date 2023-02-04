@@ -77,3 +77,8 @@ I still need to learn more about [markdown files](https://docs.github.com/en/get
 - You can buy domain names through Amazon. .link and .click are the cheapest, but .click has no privacy protection
 - You can connect that to an IP through Route 53 - Hosted Zones
     - add two records (one blank, one with *) to direct all subdomains to the main page.
+
+### HTTPS, TLS, and certificates
+- With Caddy, it was really easy to enable https
+- All I did was essentially add my domain name to three places and it started working
+- I'm not sure what the installation process looks like
