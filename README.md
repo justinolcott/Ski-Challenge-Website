@@ -82,3 +82,97 @@ I still need to learn more about [markdown files](https://docs.github.com/en/get
 - With Caddy, it was really easy to enable https
 - All I did was essentially add my domain name to three places and it started working
 - I'm not sure what the installation process looks like
+
+### HTML
+## Intro
+HTML is all about structure and uses these common elements: element	meaning
+        html	The page container
+
+        head	Header information
+        title	Title of the page
+        meta	Metadata for the page such as character set or viewport settings
+        script	JavaScript reference. Either a external reference, or inline
+        include	External content reference
+        body	The entire content body of the page
+        header	Header of the main content
+        footer	Footer of the main content
+        nav	Navigational inputs
+        main	Main content of the page
+        section	A section of the main content
+        aside	Aside content from the main content
+        div	A block division of content
+        span	An inline span of content
+        h<1-9>	Text heading. From h1, the highest level, down to h9, the lowest level
+        p	A paragraph of text
+        b	Bring attention
+        table	Table
+        tr	Table row
+        th	Table header
+        td	Table data
+        ol,ul	Ordered or unordered list
+        li	List item
+        a	Anchor the text to a hyperlink
+        img	Graphical image reference
+        dialog	Interactive component such as a confirmation
+        form	A collection of user input
+        input	User input field
+        audio	Audio content
+        video	Video content
+        svg	Scalable vector graphic content
+        iframe	Inline frame of another HTML page
+## Structure
+This is the basic layout of HTML structure
+```
+<body>
+  <p>Body</p>
+  <header>
+    <p>Header - <span>Span</span></p>
+    <nav>
+      Navigation
+      <div>Div</div>
+      <div>Div</div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <p>Section</p>
+      <ul>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ul>
+    </section>
+    <section>
+      <p>Section</p>
+      <table>
+        <tr>
+          <th>Table</th>
+          <th>Table</th>
+          <th>Table</th>
+        </tr>
+        <tr>
+          <td>table</td>
+          <td>table</td>
+          <td>table</td>
+        </tr>
+      </table>
+    </section>
+    <aside>
+      <p>Aside</p>
+    </aside>
+  </main>
+
+  <footer>
+    <div>Footer - <span>Span</span></div>
+  </footer>
+</body>
+```
+## Input
+These are the HTML input [elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
+The best ones in my opinion are text, password, and email, but there are many different input types.
+
+## Media
+The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code for render a visual image that can even be animated.
+
+You can also use inspect element to see what websites use!
