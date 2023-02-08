@@ -176,3 +176,55 @@ The best ones in my opinion are text, password, and email, but there are many di
 The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code for render a visual image that can even be animated.
 
 You can also use inspect element to see what websites use!
+
+## Simon HTML
+- We have to use HTML to create a basic structure that we can then add styling and functionality to later
+- You can use href to link local pages / tabs
+- You can use SVG to create shapes
+- Most pages might have the same head and footer!
+- Most pages also start with the same:
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+```
+
+- To deploy it, it is best to use a script like this one:
+```
+#!/bin/bash
+
+while getopts k:h:s: flag
+do
+    case "${flag}" in
+        k) key=${OPTARG};;
+        h) hostname=${OPTARG};;
+        s) service=${OPTARG};;
+    esac
+done
+
+if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
+    printf "\nMissing required parameter.\n"
+    printf "  syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
+    exit 1
+fi
+
+printf "\n----> Deploying files for $service to $hostname with $key\n"
+
+# Step 1
+printf "\n----> Clear out the previous distribution on the target.\n"
+ssh -i "$key" ubuntu@$hostname << ENDSSH
+rm -rf services/${service}/public
+mkdir -p services/${service}/public
+ENDSSH
+
+# Step 2
+printf "\n----> Copy the distribution package to the target.\n"
+scp -r -i "$key" * ubuntu@$hostname:services/$service/public
+
+```
