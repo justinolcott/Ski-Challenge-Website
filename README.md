@@ -182,6 +182,7 @@ You can also use inspect element to see what websites use!
 - You can use href to link local pages / tabs
 - You can use SVG to create shapes
 - Most pages might have the same head and footer!
+- the link rel appears to add that little icon to the tab!
 - Most pages also start with the same:
 ```
 <!DOCTYPE html>
