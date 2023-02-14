@@ -229,3 +229,51 @@ printf "\n----> Copy the distribution package to the target.\n"
 scp -r -i "$key" * ubuntu@$hostname:services/$service/public
 
 ```
+
+## CSS Introduction
+
+### Selectors
+- Selectors are used to select which HTML element you will be applying your styling to.
+- [MDN CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
+- You can element selectors, combinators, class selectors, ID selectors, attribute selectors, and pseudo selctors!
+### Declarations
+- Declarations are used to state what property you will be styling. There are many different options.
+- [MDN reference section on properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
+- It is important to know the different units and colors available for setting these declarations
+### Fonts
+- The first font available will be what is used
+- "There are four major families of fonts: Serif, san-serif, fixed, and symbol. A serif is a small stroke attached to the ends of a character's major strokes. Serif fonts have the extra strokes, san-serif fonts do not. Fixed fonts characters all are the same size. This is useful for lining up text when doing things like coding or display tabular data. Symbol fonts represent non-language characters such as arrows or emojis."
+
+- [Google's Open source fonts](https://fonts.google.com/)
+```
+@import url('https://fonts.googleapis.com/css2?family=Rubik Microbe&display=swap');
+
+p {
+  font-family: 'Rubik Microbe';
+}
+```
+
+-[MDN Web Fonts](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Web_fonts)
+
+
+### Animation
+-[MDN Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+- [Cool cloud codepen](https://codepen.io/leesjensen/pen/wvXEaRq)
+- [MDN Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+- Animate by stating it is an animation, providing a start and stop, and any intermediate steps
+
+```
+@keyframes demo {
+  from {
+    font-size: 0vh;
+  }
+
+  95% {
+    font-size: 21vh;
+  }
+
+  to {
+    font-size: 20vh;
+  }
+}
+```
