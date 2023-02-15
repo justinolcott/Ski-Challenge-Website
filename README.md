@@ -277,3 +277,71 @@ p {
   }
 }
 ```
+
+## CSS Grid and Flex
+[My Codepen example](https://codepen.io/justinolcott/pen/KKxwqyE)
+
+### Grid
+
+- an example of using grid
+  - the display is grid
+  - the columns will be automatic with a minimnum of 300 px
+  - the fr is a fractual unit
+```
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+```
+
+### Flex
+- a general flexbox setup
+```
+header {
+  flex: 0 80px;
+  background: hsl(223, 57%, 38%);
+}
+
+footer {
+  flex: 0 30px;
+  background: hsl(180, 10%, 10%);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+```
+- how to set differing sizes / ratios
+```
+section:nth-child(1) {
+  flex: 1;
+  background-color: hsl(180, 10%, 80%);
+}
+section:nth-child(2) {
+  flex: 3;
+  background-color: white;
+}
+```
+
+#### Media Query
+- Use these to account for irregular sizes
+```
+@media (orientation: portrait) {
+  main {
+    flex-direction: column;
+  }
+}
+
+@media (max-height: 700px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+}
+```
