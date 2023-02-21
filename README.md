@@ -405,3 +405,52 @@ npm install bootstrap@5.2.3
 - we used bg-secondary, text-light, and other stylizing keywords to control similar looks
 - we used <link rel="stylesheet" href="main.css"> to link the css sheet
 - we used <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> to link to bootstrap
+
+
+## UX Design
+
+
+- Things to keep in mind:
+  - Design as a story
+  - Simplicity
+  - Consistent
+  - Navigation
+    - use an application map and breadcrumbs
+  - Colors
+    - Some free tools you should explore include [Paletton](https://paletton.com/) and [Adobe](https://color.adobe.com/create/color-wheel).
+  - Typography
+    - When picking fonts you usually want to restrict the number of fonts to three or less. You also want to use them consistently. For example, it is common to use a San Serif font for buttons, navigation links, and body text. Serif fonts are used for paragraph headings. Monospaced fonts are for coding examples or text than need alignment.
+    - Google's Free Open collection of fonts [here](https://fonts.google.com/about).
+    - Iconography
+      - There are lots of standard icon packages that you can choose from. This includes packages such as [Font Awesome](https://fontawesome.com/), [Bootstrap Icons](https://icons.getbootstrap.com/), [Material Icons](http://google.github.io/material-design-icons/), [Flat Color Icons](https://github.com/icons8/flat-color-icons), and [Ant Design Icons](https://github.com/ant-design/ant-design-icons)
+  - Text
+    - Purpose	Size
+      - Page title	96 px
+      - Titles	48-20 px
+      - Text	16 px
+      - Secondary text	14 px
+      - Input	16 px
+    - Limiting line length
+      - Instead you want to specify a maximum width for your paragraphs. Usually a width of 60 to 80 characters is optimal. You can set this with the max-width property set to something like 35em. The em unit is the approximately the width of the m character in the font and so about half of an 'm' is about the average character width.
+  - Internationalization
+    - Pay attention to reading from right to left, different languages, dates, currencies, numerical seperators, time zones, and iconography
+  - Space, white space has power and is easier on the eyes
+  - Interaction creates retention
+  - Images can be very useful, but do not use them as space fillers
+  - Animation can be useful to confirm choices, demonstrate progress, and focus attention, but do not overdo it
+  - Decision fatigue, do not present to many inputs at one time
+  - Device awareness and making your application more seamless
+  - Device size and orientation
+  - Web Performance
+  - Short circuit: think about those who may not have the network to fully interact with the page
+  - Accessibility
+    - visual, high contrast themes, screen readers
+    - audiio, closed captions, textual alternatives
+    - physical, keyboard navigation, element ordering
+  - Walls
+    - Complexity
+    - Payment walls
+    - Application Failure
+    - Security
+    - Legal (cookies)
+    
