@@ -345,3 +345,63 @@ section:nth-child(2) {
   }
 }
 ```
+
+### CSS Debugging
+- it is helpful to use Chrome Inspect to debug CSS
+
+### CSS Frameworks
+- Bootstrap and Tailwind are the current top frameworks
+- You can integrate Bootstrap into your web applications simply by referencing the Bootstrap CSS files from their content delivery network (CDN). You then add the HTML link elements to your head element like this.
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    ...
+  </body>
+</html>
+```
+- If you are going to use Bootstrap components that require JavaScript (carousel, buttons, and more), you will also need to include Bootstrap's JavaScript module. You add this by putting the following at the end of your HTML body element.
+```
+<body>
+  ...
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"
+  ></script>
+</body>
+```
+- use this to include Bootstrap in the source code
+```
+npm install bootstrap@5.2.3
+```
+- this [Codepen](https://codepen.io/leesjensen/pen/JjZavjW) has all the major Bootstrap components
+- [This is my codepen](https://codepen.io/justinolcott/pen/MWqwPrE)
+- the header section is extremely useful for creating websites
+- bg has a lot of default colors
+- I found it is pretty effective to use wrappers as parents to limit the size of elements and then inside, usually setting the height and width to 100%
+
+
+
+## Simon CSS
+- our general structure was header, body, and footer
+- for the buttons, we used border radius to make a semi circle
+- we used flex to make the body fill the center
+- we used box sizing to fit it
+- we used flex: calc(100vh - 110px) to get the correct sizing
+- we used a little padding to get everything off of the edges
+- we used flex: 0 80px to get a constant header size
+- we used classes for each type of element to then modify it with css
+- we used bg-secondary, text-light, and other stylizing keywords to control similar looks
+- we used <link rel="stylesheet" href="main.css"> to link the css sheet
+- we used <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> to link to bootstrap
