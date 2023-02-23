@@ -453,4 +453,54 @@ npm install bootstrap@5.2.3
     - Application Failure
     - Security
     - Legal (cookies)
+
+# JavaScript
+## JS Intro
+- You should use semicolons and curly braces as code delimiters
+- You can write comments with // or /* */
+- You can write your own functions by writing "function"
+- You can output using console.log()
+- Make sure to pay attention to the version of JS and browser compatability
+
+## JS Console
+- you can output to console using console.log('asdf');
+- you can create a formatted message using %s, etc
+- you can use css declarations like console.log('%c JavaScript Demo', 'font-size:1.5em; color:green;');
+- wrap code with console time and timeEnd calls
+- you can count blocks of code with the count function
+
+## Adding JS to HTML
+- you can insert JS directly within a \<script> element or using src attribute of the script element
+- you can also implement it with the onclick attribute of a button element
+
+
+## JS Type and Construct
+- use let or const to declare a variable
+- there are several primitive types like null, undefined, boolean, number, bigint, string, and symbol
+- there are also object types such as object, function, date, array, map, and json
+- common operators include +, -, *, /, and === (equality)
+- beware of type conversions
+- use strict equality in my code 
+- conditionals include if, else, and if else and they look like java or c++
+- you can also use the ternary operator or boolean operators
+- loops include for, for in, for of, while, and do while
+- it also has break and continue
+- [An example codepen of min](https://codepen.io/justinolcott/pen/wvEGGOv)
+
+### JS Strings
+- JS supports UTF-16 which will include most languages
+- backticks are for string literals which can include javascript
+- string has some useful functions including length, indexof, split, starts with, ends with, and tolowercase
+
+### JS Functions
+- functions are first class objects meaning they can be assigned a name, passed as a parameter, and returned as a result, and referenced from an object or array just like a variable
+- you can have undefined parameters or default parameters
+- you can assign a variable as a function
+- functinos can be declared inside other functions
+
+### JS Arrow Functions
+- anonymous functions can be replaced with arrow functions which look like () => 3; and it may or may not have brackets if the return function is implicit. If there are arrow brackets, the return value has to be explicitly states
+- arrow functions cannot be used with contructors or iterator generators
+- arrow functions inehert the this poinder from the scope where it is created making a closure
+- it will remember the values of the variables of the scope when it was created not when they are exececuted.
     
