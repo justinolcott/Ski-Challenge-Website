@@ -539,3 +539,7 @@ p.log();
 - you can make properties and functions private by prefixing them with a #
 - you can use extends like in java to define inheritance
 - use super to pass parameters to the parent
+
+## Notes from creating HTML and CSS Startup
+- Multiple times when something wasn't working it was because I wasn't including a reference in the head either to my own css or an external one like Bootstrap or Google Fonts
+- The images I used make it take a little longer to load, so I will have to shrink the images.
