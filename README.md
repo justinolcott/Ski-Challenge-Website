@@ -503,4 +503,39 @@ npm install bootstrap@5.2.3
 - arrow functions cannot be used with contructors or iterator generators
 - arrow functions inehert the this poinder from the scope where it is created making a closure
 - it will remember the values of the variables of the scope when it was created not when they are exececuted.
-    
+
+
+### JS Array
+- js arrays have a lot of the normal array functions
+- js arrays also use the normal [] notation
+
+### JS Object and Classes
+- objects are a collection of name value pairs referred to as properties
+- the name must be of type string or symbol, but the value can be anything
+- objects have common object-oriented functionality such as constructors, this pointers, static properties, and functions, and inheritance
+- objects are created with the new operator
+- there is a lot of power in being able to assign object properties to anything
+- object literals allow you to provide an initial composition. It is done with brackets and a: 3, b:'fish' syntax
+- objects have built in functions such as entries, keys, and values
+- contructors are functions that return an object and can be invoked with new.
+- you can create methods within the return encapsulation
+- this can be used to reference a property within the scope
+- you can use classes to define objects and are used with the intent to create a reusable component. It looks the same as creating an object
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  log() {
+    console.log('My name is ' + this.name);
+  }
+}
+
+const p = new Person('Eich');
+p.log();
+// OUTPUT: My name is Eich
+```
+- you can make properties and functions private by prefixing them with a #
+- you can use extends like in java to define inheritance
+- use super to pass parameters to the parent
