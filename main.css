@@ -1,0 +1,40 @@
+
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item {
+  max-height: 200px;
+}
+
+.carousel-caption h3, p {
+  color: black
+}
+
+.title {
+  text-align: center;
+}
+
+.image {
+    position:relative;
+    overflow:hidden;
+    padding-bottom:100%;
+}
+.image img{
+    position:absolute;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 500px;
+  width: 100%;
+}
+body {
+  font-family: 'Gloock', serif;
+}
+
+.login-main {
+  min-height: 90vh;
+}
