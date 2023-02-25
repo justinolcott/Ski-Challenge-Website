@@ -541,15 +541,72 @@ p.log();
 - use super to pass parameters to the parent
 
 ## More Notes from creating HTML and CSS Startup
+- This header took a lot of time, but it uses the dropdown menu when it is too small:
+```
+<header class="container-fluid">
+  <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="index.html">
+          <img src="/assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          NINTH HEAVEN
+        </a>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                  <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="login.html">Sign-in / Login</a>
+                  <a class="nav-item nav-link" href="challenges.html">Challenges</a>
+              </div>
+          </div>
+  </nav>
+</header>
+```
 - Multiple times when something wasn't working it was because I wasn't including a reference in the head either to my own css or an external one like Bootstrap or Google Fonts
+- These are the links that I had to include:
+```
+<link rel="icon" type="assets/favicon" href="/assets/favicon.ico">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="main.css"/>
+```
 - The images I used make it take a little longer to load, so I will have to shrink the images.
   - I find the default image editer is very useful for resizing images and getting the correct ratios
   - I found the [pexels.com](pexels.com) is a great place to get free images
 - I still could never get icon buttons to work, so I will have to look into that
 - I found that Bootstrap is very useful in resizing and creating borders and changing colors.
 - Certain elements require javascript links at the bottom for them to function like certain bootstrap elements
+```
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+```
 - I found mx-auto, max-width, and text-center to be very useful Bootstrap elements
 - There are a ton of Bootstrap elements and icons to be used. Websites can either be created in 10 minutes or 1 year, there is so much that can go into them.
 - I found referencing codepens, old code, and example code to be very useful in adding different elements that I liked
 - the col, col-6, row, and other bootstrap classes made it very easy to get the layout that I wanted
-- 
+- I find the hamburger icon / shrink / dropdown menu very useful in making things work with mobile devices
+- I found that I really liked the carousel and forms from bootstrap.
+  - the buttons are also very useful as well as the alerts
+- This was a very good form to use that I edited:
+```
+  <div class="bd-example">
+      <form class="px-4 py-3 mx-auto" style="max-width: 300px;">
+        <div class="mb-3">
+          <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+        </div>
+      
+        <button type="submit" class="btn btn-outline-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+      </form>
+  </div>
+```
