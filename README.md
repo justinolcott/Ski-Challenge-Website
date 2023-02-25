@@ -540,6 +540,16 @@ p.log();
 - you can use extends like in java to define inheritance
 - use super to pass parameters to the parent
 
-## Notes from creating HTML and CSS Startup
+## More Notes from creating HTML and CSS Startup
 - Multiple times when something wasn't working it was because I wasn't including a reference in the head either to my own css or an external one like Bootstrap or Google Fonts
 - The images I used make it take a little longer to load, so I will have to shrink the images.
+  - I find the default image editer is very useful for resizing images and getting the correct ratios
+  - I found the [pexels.com](pexels.com) is a great place to get free images
+- I still could never get icon buttons to work, so I will have to look into that
+- I found that Bootstrap is very useful in resizing and creating borders and changing colors.
+- Certain elements require javascript links at the bottom for them to function like certain bootstrap elements
+- I found mx-auto, max-width, and text-center to be very useful Bootstrap elements
+- There are a ton of Bootstrap elements and icons to be used. Websites can either be created in 10 minutes or 1 year, there is so much that can go into them.
+- I found referencing codepens, old code, and example code to be very useful in adding different elements that I liked
+- the col, col-6, row, and other bootstrap classes made it very easy to get the layout that I wanted
+- 
