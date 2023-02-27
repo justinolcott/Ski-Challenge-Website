@@ -610,3 +610,11 @@ p.log();
       </form>
   </div>
 ```
+
+### Regular Expressions
+- you can use a regex object or a literal
+```
+const objRegex = new RegExp('ab*', 'i');
+const literalRegex = /ab*/i;
+```
+- the string class includes several functions that can include regex
