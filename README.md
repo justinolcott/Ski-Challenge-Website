@@ -618,3 +618,46 @@ const objRegex = new RegExp('ab*', 'i');
 const literalRegex = /ab*/i;
 ```
 - the string class includes several functions that can include regex
+
+### JS Rest and Spread
+- you can create a function taht takes any number of parameters using this notation:
+```
+function hasNumber(test, ...numbers) {
+  return numbers.some((i) => i === test);
+}
+
+hasNumber(2, 1, 2, 3);
+// RETURNS: true
+```
+- which technically allows JS to provide variadic functions
+- spread does the opposite, it looks like it is usually used in calling a function
+
+### Destructuring
+- you can destructure an array or object into variables using 
+```
+const [b, c, ...others] = a;
+
+console.log(b, c, others);
+// OUTPUT: 1, 2, [4,5]
+```
+- you can do objects, but you should specify which values
+```
+const o = { a: 1, b: 'animals', c: ['fish', 'cats'] };
+
+const { a, c } = o;
+
+console.log(a, c);
+// OUTPUT 1, ['fish', 'cats']
+```
+
+### JS Exceptions
+```
+try {
+  // normal execution code
+} catch (err) {
+  // exception handling code
+} finally {
+  // always called code
+}
+```
+
