@@ -661,3 +661,14 @@ try {
 }
 ```
 
+### Scope
+- four types: global, module, function, and block
+- strongly suggested that we don't use var
+- this represents the object that contains the context within the scope
+- this is automatically declared and can be references anywhere
+- this in global is globalThis object which usually refers to the browser's window object
+- this in function refers to the object that owns the function
+- this in an object references the object
+- closures allow you to access variables in a function from its surrounding state like a classes in a method
+- but arrow functions are different since it depends on its creation state
+
