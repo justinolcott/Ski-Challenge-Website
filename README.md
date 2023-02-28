@@ -672,3 +672,36 @@ try {
 - closures allow you to access variables in a function from its surrounding state like a classes in a method
 - but arrow functions are different since it depends on its creation state
 
+### Modules
+- Modules can only be used when inside a module, not from global
+- you have to explicitly state export or import
+
+### Document Object Model
+- the DOM acts like a big tree with elements inside
+- some good functions and properties include querySelectorAll, textContent, and innerHTML.
+- DOM supports inserting, modifying, and deleting elements
+- you need to first create an element and then append it
+```
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+```
+- removeChild is used to delete elements
+- injecting HTML
+```
+const el = document.querySelector('div');
+el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
+```
+- beware of common attacks, either sanitize any HTML that contains variables, or simply use DOM manipulation functions instead of using innerHTML
+- some common event listeners are clipboard, focus, keyboard, mouse, text selection, and more [here](https://developer.mozilla.org/en-US/docs/Web/Events)
+- you can also include it directly in the HTML
+```
+<button onclick='alert("clicked")'>click me</button>
+```
+
