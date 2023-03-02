@@ -718,3 +718,8 @@ const scoresText =localStorage.getItem('scores');
 - use async when you don't want to wait on the function / have it run in the background
 - use classes, methods, and functions to break the code up into understandable parts
 
+### JS Promises
+- you can use promises to execute code in parallel
+- you can use then, catch, and finally with promises
+- you can return a resolve or a reject depending on what the promise returns
+
