@@ -2,11 +2,11 @@
 
 header {
   font-family: 'Gloock', serif;
-  background-color: aliceblue;
+  background-color: rgb(215, 234, 250);
 }
 
 header a {
-  color: #343a40;
+  color: #4d5e6e;
 }
 
 .login-main {
@@ -58,3 +58,4 @@ footer {
   display: inline-block;
   vertical-align: middle;
 }
+

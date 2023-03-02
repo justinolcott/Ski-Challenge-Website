@@ -12,8 +12,8 @@
       <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="main.css"/>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-      <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
+      <link rel="stylesheet" href="https://kit.fontawesome.com/9837a2d780.css" crossorigin="anonymous">
+      
     </head>
 
     <body class="bg-light text-dark">
@@ -23,19 +23,18 @@
                     <img src="/assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     NINTH HEAVEN
                   </a>
-                <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-    
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
-                            <a class="nav-item nav-link" href="login.html">Sign-in / Login</a>
-                            <a class="nav-item nav-link" href="challenges.html">Challenges</a>
-                        </div>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="login.html">Sign-in / Login</a>
+                        <a class="nav-item nav-link" href="challenges.html">Challenges</a>
                     </div>
-            </nav>
+                </div> <!-- add this closing tag -->
+                </nav>
+                
         </header>
         <main class="container-fluid">
             <div class="container">
@@ -43,7 +42,7 @@
                     Today's new challenge: Ride singles 3 times!
                   </div>
                 <div class="row border challenges-box">
-                  <div class="col">
+                  <div class="col-lg-auto">
                     <h2 class="border-bottom"> Scoreboard </h2>
                     <ol class="scoreboard-feed">
                         <li class="scorer">
@@ -66,7 +65,7 @@
                         </li>
                     </ol>
                   </div>
-                  <div class="col-6 border-left border-right">
+                  <div class="col-lg-auto border-left border-right">
                     <h2> Challenges Feed </h2>
                     <div class="challenges-feed"> <!-- &#x1F7E6  &#x1F7E2; -->
                         <div class="border-top challenge">
@@ -110,7 +109,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-lg-auto">
                     <h2> Your Challenges </h2>
                     <div class="your-challenges">
                         <div class="border-top challenge">
