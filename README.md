@@ -704,4 +704,17 @@ el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
 ```
 <button onclick='alert("clicked")'>click me</button>
 ```
+### Simon JS
+- you can use localStorage to store values persistently on the server
+```
+const scoresText =localStorage.getItem('scores');
+        if (scoresText) {
+            scores = JSON.parse(scoresText);
+        }
+        scores = this.updateScores(userName, score, scores);
+
+        localStorage.setItem('scores', JSON.stringify(scores));
+```
+- use async when you don't want to wait on the function / have it run in the background
+- use classes, methods, and functions to break the code up into understandable parts
 
