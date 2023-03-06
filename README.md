@@ -723,3 +723,28 @@ const scoresText =localStorage.getItem('scores');
 - you can use then, catch, and finally with promises
 - you can return a resolve or a reject depending on what the promise returns
 
+## Midterm Review
+- in html what does the <div> do: creates a division element
+- to point to another dns record, you should use the following dns record type: CNAME (like an alias), point to another ip address is the a record
+- you can use this css to load fonts from google: @import url(fonts.google....)
+- promise output... burger fries taco shake noodles (taco is in the promise) (burger is after the promise) (fries is at the end) (shake is in the then) (noodles is in the finally)
+- which of the following is valid json {"x":3}
+- how would you turn the byu text blue? div.header {color:blue;}
+- Which of the following is not a valid way to invlude javascript? not <javascript> but yes to <script> yes to onclick='1+1', src....
+-  regex /A|f/i , i means case insensitive, so its any a or any f, so rat and fish matches
+- which of the following is not a valid js function, function f(x) = {}, yes to function f(x) {}, const f = function(x) {}, const f = (x) => {}
+- vows before marriage, padding around the content,  peanut butter and mayo, pals before marraige, padding, border, margin..
+- in reverse order, its margin, border, padding, content
+- a.reduce, map, filter,...
+- <ul> is an html tag for an unordered list
+- adds a mouseover event listener to a p element, document.querySelector('p'), just the first since its not a querySelectorAll, then .addEventListener(mouesover, console.log): mouseover and hover are about the same
+- Which will create a valid html hyper link? <a href-"asdf">x</a>
+- a.map function
+- another promise with an async and await, so it wait for the promise to finish
+- async will always return a promise
+- what does the DOM textContent property do? Sets the child text for the an element
+- Which of the following is a DNS subdomain? c260.cs.byu.edu the whole thing is the subdomain, 
+- flex-direction: column-reverse, used a lot for right to left languages... since its a flex column the elements will all be in one column so on different rows
+- valid javascript objects require : not =, and quotes dont matter either
+- chmod +x deploy.sh, ls -la deploy.sh, sudo deploy.sh(no sense), ssh deploy.sh (no sense), 
+- 
