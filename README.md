@@ -747,4 +747,13 @@ const scoresText =localStorage.getItem('scores');
 - flex-direction: column-reverse, used a lot for right to left languages... since its a flex column the elements will all be in one column so on different rows
 - valid javascript objects require : not =, and quotes dont matter either
 - chmod +x deploy.sh, ls -la deploy.sh, sudo deploy.sh(no sense), ssh deploy.sh (no sense), 
-- 
+
+
+### Simon JS
+- you can pretty much just use your html and css if it was set up properly
+- make sure to include a script src in each file
+- for buttons, you can usually just include a onclick="function" to add functionality
+- you can do a lot with document such as querySelector, or querySelectorAll
+- from the code we used, it appears to use functions to seperate the functionality code with the webpage code by having a function call another function that then accesses the website
+- use localStorage to save things to the server
+- when creating elements, it tends to be a document.createElement, element.textContent assignment, and then parent.appendChild().
