@@ -62,6 +62,7 @@ The basics for using git and github are:
 1. Make changes to the code
 1. Commit the changes (`git commit`)
 1. Push the changes to GitHub (`git push`)
+- Git supports the ability to branch your code. This allows you to work on variations of the code while still allowing progress on the main branch. For example, if you wanted to work on a new feature named A without interrupting work on the master branch, you would use the git branch A command and start working on the A branch with the git checkout A command. Now commits can be down to both the master and the A branch. When you want to combine the work done on both branches you us checkout the master branch and execute git merge A. If you decide you want to abandon the new feature then you just don't ever merge it back into the master branch.
 
 I still need to learn more about [markdown files](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).
 
@@ -77,6 +78,14 @@ I still need to learn more about [markdown files](https://docs.github.com/en/get
 - You can buy domain names through Amazon. .link and .click are the cheapest, but .click has no privacy protection
 - You can connect that to an IP through Route 53 - Hosted Zones
     - add two records (one blank, one with *) to direct all subdomains to the main page.
+
+### Web Servers
+- Web service gateways
+  - To resolve this we introduce a service gateway, or sometimes called a reverse proxy, that is itself a simple web service that listens on the common HTTP port 443. The gateway then looks at the request and maps it to the other services running on a different ports.
+- Microservices
+  - Web services that provide a single functional purpose are referred to as microservices. By partitioning functionality into small logical chucks, you can develop and manage them independently from other functionality in a larger system. 
+- Serverless
+  - The idea of microservices naturally evolved into the world of serverless functionality where the server is conceptually removed from the architecture and you just write a function that speaks HTTP.
 
 ### HTTPS, TLS, and certificates
 - With Caddy, it was really easy to enable https
@@ -738,7 +747,7 @@ const scoresText =localStorage.getItem('scores');
 - a.reduce, map, filter,...
 - <ul> is an html tag for an unordered list
 - adds a mouseover event listener to a p element, document.querySelector('p'), just the first since its not a querySelectorAll, then .addEventListener(mouesover, console.log): mouseover and hover are about the same
-- Which will create a valid html hyper link? <a href-"asdf">x</a>
+- Which will create a valid html hyper link? <a href="asdf">x</a>
 - a.map function
 - another promise with an async and await, so it wait for the promise to finish
 - async will always return a promise
