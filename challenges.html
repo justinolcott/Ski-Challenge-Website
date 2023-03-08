@@ -30,7 +30,7 @@
                         <a class="nav-item nav-link" href="login.html">Sign-in / Login</a>
                         <a class="nav-item nav-link" href="challenges.html">Challenges</a>
                     </div>
-                </div> <!-- add this closing tag -->
+                </div>
                 </nav>
                 
         </header>
@@ -66,9 +66,9 @@
                   <div class="col-lg-auto border-left border-right">
                     <h2> Challenges Feed </h2>
                     <div class="challenges-feed"> <!-- &#x1F7E6  &#x1F7E2; -->
-                        <div class="border-top challenge" id="FrequentFlier">
+                        <div class="border-top challenge" name="FrequentFlier">
                             <div class="border-top d-flex align-items-center challenge">
-                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2" onclick="addChallengeToList('FrequentFlier')">
+                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2" onclick="addChallengeToList(this)">
                                 <h4 class="mb-0"> Frequent Flier<span> &#x1F7E6;</span> </h4> 
                             </div>
                             <div class="border-top challenge">
@@ -76,9 +76,9 @@
                             </div>
                         </div>
 
-                        <div class="border-top challenge" id="DotHopper">
+                        <div class="border-top challenge" name="DotHopper">
                             <div class="border-top d-flex align-items-center challenge">
-                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2">
+                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2" onclick="addChallengeToList(this)">
                                 <h4 class="mb-0"> Dot Hopper<span> &#x25C6;</span> </h4> 
                             </div>
                             <div class="border-top challenge">
@@ -86,9 +86,9 @@
                             </div>
                         </div>
 
-                        <div class="border-top challenge" id="NinetoFive">
+                        <div class="border-top challenge" name="NinetoFive">
                             <div class="border-top d-flex align-items-center challenge">
-                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2">
+                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2" onclick="addChallengeToList(this)">
                                 <h4 class="mb-0">The Nine to Five<span> &#x1F7E2;</span> </h4> 
                             </div>
                             <div class="border-top challenge">
@@ -102,7 +102,25 @@
                   <div class="col-lg-auto">
                     <h2> Your Challenges </h2>
                     <div class="your-challenges">
-                        <div class="border-top challenge">
+                        <!-- <div class="border-top challenge" name="FrequentFlier">
+                            <div class="border-top d-flex align-items-center challenge">
+                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2" onclick="addChallengeToList('FrequentFlier')">
+                                <h4 class="mb-0"> Frequent Flier<span> &#x1F7E6;</span> </h4> 
+                            </div>
+                            <div class="border-top challenge">
+                                <p> &#x2022; Ski every single lift at any resort </p>
+                            </div>
+                        </div> -->
+                        <!-- <div class="border-top challenge" name="DotHopper">
+                            <div class="border-top d-flex align-items-center challenge">
+                                <input type="checkbox" name="challenge1" id="challenge1" class="mr-2">
+                                <h4 class="mb-0"> Dot Hopper<span> &#x25C6;</span> </h4> 
+                            </div>
+                            <div class="border-top challenge">
+                                <p> &#x2022; Ski at every Ikon resort in Utah </p>
+                            </div>
+                        </div> -->
+                        <!-- <div class="border-top challenge">
                             <h4> Space Jumper <span>&#x2714;</span> </h4> 
                             <p> &#x2022; Ride the highest lift in North America at Breckenridge </p>
                         </div>
@@ -121,7 +139,7 @@
                         <div class="border-top challenge">
                             <h4> Skier <span>&#x2714;</span> </h4> 
                             <p> &#x2022; Ski Alta because no snowboarders are allowed </p>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>            
