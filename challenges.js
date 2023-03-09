@@ -1,22 +1,16 @@
 function sortScoreboard() {
-    // Select the scoreboard-feed list
-    const scoreboard = document.querySelector('.scoreboard-feed');
-  
-    // Get an array of the list items
-    const scorers = Array.from(scoreboard.children);
-  
-    // Sort the list items based on their score values
-    scorers.sort(function(a, b) {
-      const scoreA = parseInt(a.querySelector('span').textContent);
-      const scoreB = parseInt(b.querySelector('span').textContent);
-      return scoreB - scoreA;
-    });
-  
-    // Reorder the list items in the scoreboard list
-    scorers.forEach(function(scorer) {
-      scoreboard.appendChild(scorer);
-    });
+  console.log("Sorting...");
+  const scoreboard = document.querySelector(".scoreboard-feed");
+  const scorers = Array.from(scoreboard.children);
+  scorers.sort((a, b) => {
+    const pointsA = parseInt(a.querySelector("span").textContent.split(' - ')[1].split(' ')[0]);
+    const pointsB = parseInt(b.querySelector("span").textContent.split(' - ')[1].split(' ')[0]);
+    console.log(pointsA);
+    return pointsB - pointsA;
+  });
+  scorers.forEach((scorer) => scoreboard.appendChild(scorer));
 }
+
 
 function addChallengeToList(event) {
     const checkbox = event;
