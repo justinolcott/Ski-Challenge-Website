@@ -1,30 +1,3 @@
-function setScoreboard() {
-    // Select the scoreboard-feed list
-    const scoreboard = document.querySelector('.scoreboard-feed');
-
-    // Create a new list item element
-    const newScorer = document.createElement('li');
-    newScorer.classList.add('scorer');
-
-    // Create a new h4 element and set its text content
-    const nameEl = document.createElement('h4');
-    nameEl.textContent = 'John';
-    newScorer.appendChild(nameEl);
-
-    // Create a new span element and set its text content
-    const scoreEl = document.createElement('span');
-    scoreEl.textContent = ' - 500 pts';
-    nameEl.appendChild(scoreEl);
-
-    // Get the first item in the scoreboard list
-    const firstScorer = scoreboard.firstChild;
-
-    // Insert the new list item before the first item in the scoreboard list
-    scoreboard.insertBefore(newScorer, firstScorer);
-
-    sortScoreboard();
-}
-
 function sortScoreboard() {
     // Select the scoreboard-feed list
     const scoreboard = document.querySelector('.scoreboard-feed');
@@ -56,6 +29,9 @@ function addChallengeToList(event) {
     } else {
       // Remove challenge from user's list of challenges
       removeChallengeFromList(challengeName);
+      const count = countChallengePoints();
+      console.log(count);
+      localStorage.setItem("points", count);
       console.log(`Removed ${challengeName} from user's list of challenges`);
     }
 }
@@ -88,10 +64,11 @@ function addChallenge(challengeName) {
       console.log('Challenge already exists');
       return;
     }
+    
   
     // Create new challenge element
     const challengeEl = document.createElement('div');
-    challengeEl.classList.add('border-top', 'challenge');
+    challengeEl.classList.add('border-top', 'challenge', 'your-challenge');
     challengeEl.setAttribute('name', challengeName);
   
     // Create header element and add to challenge element
@@ -107,8 +84,9 @@ function addChallenge(challengeName) {
     checkboxEl.classList.add('mr-2');
     checkboxEl.checked = true;
     checkboxEl.addEventListener("click", function() {
-        checkboxEl.parentNode.parentNode.remove();
+        removeChallengeFromList(challengeName);
         document.querySelector('.challenges-feed [name="' + challengeName + '"] input[type="checkbox"]').checked = false;
+        
 
     });
     headerEl.appendChild(checkboxEl);
@@ -131,12 +109,60 @@ function addChallenge(challengeName) {
   
     // Add new challenge to the top of the list
     yourChallenges.insertBefore(challengeEl, yourChallenges.firstChild);
+
+    updateCount();
 }
   
 function removeChallengeFromList(challengeName) {
     const challenge = document.querySelector('.your-challenges [name="' + challengeName + '"]');
     challenge.remove()
+    updateCount();
 }
 
+function countChallengePoints() {
+  const yourChallenges = document.querySelector('.your-challenges');
+  const challenges = yourChallenges.querySelectorAll('.your-challenge');
+  let totalPoints = 0;
+  console.log("For each challenge:" + challenges.length);
+  challenges.forEach((challenge) => {
+    console.log("Doing a challenge");
+    const pointsText = challenge.querySelector('h4').textContent.split(' - ')[1].split(' ')[0];
+    console.log("Points:" + pointsText);
+    const points = parseInt(pointsText);
+    totalPoints += points;
+  });
+
+  return totalPoints;
+}
   
-  
+function updateCount() {
+  const scoreboard = document.querySelector(".scoreboard-feed");
+  const name = localStorage.getItem("userName");
+  const points = countChallengePoints();
+  // Get all the scorer elements and loop through them
+  const scorers = scoreboard.querySelectorAll(".scorer");
+  for (let i = 0; i < scorers.length; i++) {
+    const scorer = scorers[i];
+    
+    // Find the scorer with the given name and update its points
+    const h4 = scorer.querySelector("h4");
+    const span = h4.querySelector("span");
+    if (h4.textContent.includes(name)) {
+      span.textContent = ` - ${points} pts`;
+      break; // Stop looping after finding the first match
+    }
+  }
+  sortScoreboard();
+}
+
+window.onload = function() {
+  const scoreboard = document.querySelector(".scoreboard-feed");
+  const newItem = document.createElement("li");
+  const name = localStorage.getItem("userName");
+  const points = countChallengePoints();
+  newItem.className = "scorer";
+  newItem.innerHTML = `
+    <h4>${name}<span> - ${points} pts</span></h4>
+  `;
+  scoreboard.appendChild(newItem);
+}
