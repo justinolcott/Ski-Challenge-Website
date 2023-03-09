@@ -105,9 +105,12 @@ function addChallenge(challengeName) {
     checkboxEl.name = 'challenge-' + challengeName;
     checkboxEl.id = 'challenge-' + challengeName;
     checkboxEl.classList.add('mr-2');
-    checkboxEl.onclick = function() {
-      addChallengeToList();
-    };
+    checkboxEl.checked = true;
+    checkboxEl.addEventListener("click", function() {
+        checkboxEl.parentNode.parentNode.remove();
+        document.querySelector('.challenges-feed [name="' + challengeName + '"] input[type="checkbox"]').checked = false;
+
+    });
     headerEl.appendChild(checkboxEl);
   
     // Create header text element and add to header element
