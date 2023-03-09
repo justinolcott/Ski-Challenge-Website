@@ -766,3 +766,11 @@ const scoresText =localStorage.getItem('scores');
 - from the code we used, it appears to use functions to seperate the functionality code with the webpage code by having a function call another function that then accesses the website
 - use localStorage to save things to the server
 - when creating elements, it tends to be a document.createElement, element.textContent assignment, and then parent.appendChild().
+
+## Startup JS
+- I found that using classes was very effective in making things more concise and understandable
+- I had troubles having different classes access each other's methods. I was stuck on inheritance, but instead, it was solved very easily by passing the instance to class that needs it. And you can even pass two instances each other's references to each other to create a strong relationship
+- I found it effective to have models or classes to represent repeatable sections of html such as a challenge representing a challenge element
+- I used querySelect a ton!
+- to change the page, use window.location.href
+- I had some problems with href when it was in a form vs. a button.
