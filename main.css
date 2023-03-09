@@ -59,3 +59,7 @@ footer {
   vertical-align: middle;
 }
 
+.challenges-feed, .your-challenges {
+  max-width: 350px;
+}
+
