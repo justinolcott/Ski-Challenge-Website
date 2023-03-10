@@ -251,7 +251,7 @@ class Scoreboard {
     console.log("getting points")
     if (this.yourChallenges !== undefined) {
       for (let c in this.yourChallenges.challenges) {
-        count += this.yourChallenges.challenges[c].points;
+        count += Number(this.yourChallenges.challenges[c].points);
       }
       console.log(count);
     }
@@ -329,3 +329,8 @@ function reset() {
 }
 window.onload = reload();
 
+function clearLocalStorage() {
+  localStorage.clear();
+  reload();
+  // Add any additional functionality here, such as resetting the page or displaying a message
+}

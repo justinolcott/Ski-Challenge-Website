@@ -18,6 +18,9 @@ function createNewChallenge() {
     str = str.replace(/\s/g, '');
     let customChallenges = [];
     customChallenges = JSON.parse(localStorage.getItem("customChallenges"));
+    if (customChallenges === null) {
+        customChallenges = [];
+    }
     const customChallenge = new Challenge(str, " ", nameEl.value, descEl.value, pointEl.value);
     customChallenges.push(customChallenge);
     console.log("Length" + customChallenges.length);
