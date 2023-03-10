@@ -778,3 +778,6 @@ const scoresText =localStorage.getItem('scores');
 - If we are storing objects, we have to use json to either parse or stringify it.
 - I found that breaking it down into functions and classes as small as reasonably possible and not repeating code made it extremely easy to change and add things on.
 - I found to avoid innerHtml, we can use different element add feature and removal features.
+- you can user Number(..) to convert things to be a number
+- you can use localStorage.clear() to clear local storage
+- I think it was neat learning html, css, and javascript to build the website, but knowing what I know now, I would probably develop everything together, but also spend a lot more time deciding how I would want things done.
