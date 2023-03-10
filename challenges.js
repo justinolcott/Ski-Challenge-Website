@@ -54,7 +54,7 @@ class yourChallenges {
   
     const headerTextEl = document.createElement('h4');
     headerTextEl.classList.add('mb-0');
-    headerTextEl.innerHTML = `${challenge.header} <span>&#x2714;</span>`;
+    headerTextEl.innerHTML = `${challenge.header} <span>&#x2714;</span>  - ${challenge.points}`;
     headerEl.appendChild(headerTextEl);
   
     const bodyEl = document.createElement('div');
@@ -72,6 +72,7 @@ class yourChallenges {
     while (feedEl.firstChild) {
       feedEl.removeChild(feedEl.firstChild);
     }
+
     for (let challengeKey in this.challenges) {
       let challenge = this.challenges[challengeKey];
       
@@ -155,13 +156,15 @@ class Feed {
     return challengeEl;
   }
 
+
   fill() {
-    this.add(new Challenge("FrequentFlier", "&#x1F7E6;", "Frequent Flier", "Ski every single lift at any resort", 400));
-    this.add(new Challenge("DotHopper", "&#x25C6;", "Dot Hopper", "Ski at every Ikon resort in Utah", 600));
-    this.add(new Challenge("NinetoFive", "&#x1F7E2;", "The Nine to Five", "Ski at every Ikon resort in Utah", 200));
-    this.add(new Challenge("ThePeakHunter", "&#x1F7E6;", "The Peak Hunter", "Ski the highest peak at every resort in your state", 400));
-    this.add(new Challenge("TheDistanceSkier", "&#x25C6;", "The Distance Skier", "Ski 500 miles or more in one season", 600));
-    this.add(new Challenge("TheSnowboarder", "&#x1F7E2;", "The Snowboarder", "Learn how to snowboard and successfully ride down at least one intermediate run", 200));
+    this.add(new Challenge("FrequentFlier", " ", "Frequent Flier", "Ski every single lift at any resort", 400));
+    this.add(new Challenge("DotHopper", " ", "Dot Hopper", "Ski at every Ikon resort in Utah", 600));
+    this.add(new Challenge("NinetoFive", " ", "The Nine to Five", "Ski at every Ikon resort in Utah", 200));
+    this.add(new Challenge("ThePeakHunter", " ", "The Peak Hunter", "Ski the highest peak at every resort in your state", 400));
+    this.add(new Challenge("TheDistanceSkier", " ", "The Distance Skier", "Ski 500 miles or more in one season", 600));
+    this.add(new Challenge("TheSnowboarder", " ", "The Snowboarder", "Learn how to snowboard and successfully ride down at least one intermediate run", 200));
+    //this.add(new Challenge("Test", "", "Test Header", "Test Descirption", 100));
   }
 
   updateFeed() {
@@ -175,6 +178,8 @@ class Feed {
       feedEl.appendChild(child);
     }
     this.board.updateBoard();
+
+    console.log("Custom challenges in feed: " + JSON.parse(localStorage.getItem("customChallenges")).length);
   }
 
   click(checkbox, challenge) {
@@ -282,7 +287,7 @@ class Scoreboard {
 
 }
 
-class ChallengeScreen {
+class ChallengesScreen {
   constructor() {
     this.board = new Scoreboard();
     this.yourChallenges = new yourChallenges();
@@ -292,15 +297,35 @@ class ChallengeScreen {
     this.yourChallenges.addScoreboard(this.board);
     this.yourChallenges.addFeed(this.feed);
     this.feed.fill();
-    this.feed.updateFeed();
-    
-    
+    this,this.addCustomChallenges();
+    this.feed.updateFeed();   
+  }
+
+  addCustomChallenges() {
+    const customChallenges = JSON.parse(localStorage.getItem("customChallenges"));
+    for (let k in customChallenges) {
+      console.log(k);
+      this.feed.add(customChallenges[k]);
+    }
   }
 }
 
-function reload() {
-  let challengeScreen = new ChallengeScreen();
-
+Storage.prototype.setObj = function(key, obj) {
+  return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+  return JSON.parse(this.getItem(key))
 }
 
+function reload() {
+  let challengeScreen = new ChallengesScreen();
+  let customChallenges = [];
+  //this.reset();
+}
+
+
+function reset() {
+  localStorage.setItem("customChallenges", null);
+}
 window.onload = reload();
+

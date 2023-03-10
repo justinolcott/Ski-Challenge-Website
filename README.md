@@ -774,3 +774,7 @@ const scoresText =localStorage.getItem('scores');
 - I used querySelect a ton!
 - to change the page, use window.location.href
 - I had some problems with href when it was in a form vs. a button.
+- We can use local storage to store data persistently just with one user
+- If we are storing objects, we have to use json to either parse or stringify it.
+- I found that breaking it down into functions and classes as small as reasonably possible and not repeating code made it extremely easy to change and add things on.
+- I found to avoid innerHtml, we can use different element add feature and removal features.

@@ -7,3 +7,10 @@ function login() {
     localStorage.setItem("password", passEl.value);
     window.location.href = "challenges.html";
 }
+
+const pass = document.getElementById("exampleDropdownFormPassword1");
+pass.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+        login();
+    }
+});
