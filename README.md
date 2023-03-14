@@ -818,3 +818,60 @@ Here is a list of common port numbers that you might come across.
 | 161  | Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers |
 | 194  | Internet Relay Chat (IRC) for chatting                                                             |
 | 443  | HTTP Secure (HTTPS) for secure web requests                                                        |
+
+### HTTP
+- an http exchange consists of a request and response
+- a request:
+
+```http
+GET /hypertext/WWW/Helping.html HTTP/1.1
+Host: info.cern.ch
+Accept: text/html
+```
+
+An HTTP request has this general syntax.
+
+```yaml
+<verb> <url path, parameters, anchor> <version>
+[<header key: value>]*
+[
+  <body>
+]
+```
+
+- a response:
+```yaml
+HTTP/1.1 200 OK
+Date: Tue, 06 Dec 2022 21:54:42 GMT
+Server: Apache
+Last-Modified: Thu, 29 Oct 1992 11:15:20 GMT
+ETag: "5f0-28f29422b8200"
+Accept-Ranges: bytes
+Content-Length: 1520
+Connection: close
+Content-Type: text/html
+<TITLE>Helping -- /WWW</TITLE>
+<NEXTID 7>
+<H1>How can I help?</H1>There are lots of ways you can help if you are interested in seeing
+the <A NAME=4 HREF=TheProject.html>web</A> grow and be even more useful...
+```
+
+An HTTP response has the following syntax.
+
+```yaml
+<version> <status code> <status string>
+[<header key: value>]*
+[
+  <body>
+]
+```
+
+- http codes
+1xx - Informational.
+2xx - Success.
+3xx - Redirect to some other location, or that the previously cached resource is still valid.
+4xx - Client errors. The request is invalid.
+5xx - Server errors. The request cannot be satisfied due to an error on the server.
+
+- 
+
