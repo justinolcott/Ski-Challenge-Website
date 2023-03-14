@@ -878,3 +878,5 @@ An HTTP response has the following syntax.
 
 CORS allows the client (e.g. browser) to specify the origin of a request and then let the server respond with what origins are allowed. The server may say that all origins are allowed, for example if they are a general purpose image provider, or only a specific origin is allowed, for example if they are a bank's authentication service. If the server doesn't specify what origin is allowed then the browser assumes that it must be the same origin.
 
+### Fetch
+- we can use fetch on apis in js to get data from other websites, but we may run into CORS issues
