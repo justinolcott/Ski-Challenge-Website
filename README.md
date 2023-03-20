@@ -880,3 +880,82 @@ CORS allows the client (e.g. browser) to specify the origin of a request and the
 
 ### Fetch
 - we can use fetch on apis in js to get data from other websites, but we may run into CORS issues
+
+
+### Webservices
+
+
+### Node.js
+- Steps:
+Create your project directory
+Initialize it for use with NPM by running npm init -y
+Make sure .gitignore file contains node-modules
+Install any desired packages with npm install <package name here>
+Add require('<package name here>') to your JavaScript code
+Run your code with node main.js
+
+- using http:
+➜ mkdir webservicetest
+➜ cd webservicetest
+➜ npm init -y
+➜ npm install http
+
+```
+const http = require('http');
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>Hello Node.js!</h1>');
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log(`Web service listening on port 8080`);
+});
+```
+
+'''
+node main.js
+'''
+
+
+### Express
+- Everything in Express revolves around creating and using HTTP routing and middleware functions. You create an Express application by using NPM to install the Express package and then calling the express constructor to create the express application and listen for HTTP requests on a desired port.
+```
+app.get('/store/provo', (req, res, next) => {
+  res.send({ name: 'provo' });
+});
+```
+- The express app compares the routing function patterns in the order that they are added to the Express app object. So if you have two routing functions with patterns that both match, the first one that was added will be called and given the next matching function in the next parameter.
+- you can use colons to accept a parameter name
+```
+app.get('/store/:storeName', (req, res, next) => {
+  res.send({ name: req.params.storeName });
+});
+```
+- more examples:
+```
+// Wildcard - matches /store/x and /star/y
+app.put('/st*/:storeName', (req, res) => res.send({ update: req.params.storeName }));
+
+// Pure regular expression
+app.delete(/\/store\/(.+)/, (req, res) => res.send({ delete: req.params[0] }));
+```
+- middle ware function looks like : function middlewareName(req, res, next)
+- your own middleware
+```
+app.use((req, res, next) => {
+  console.log(req.originalUrl);
+  next();
+});
+```
+- In addition to creating your own middleware functions, you can use a built-in middleware function. Here is an example of using the static middleware function. This middleware responds with static files, found in a given directory, that match the request URL.
+```
+app.use(express.static('public'));
+```
+- you can have third party ones with npm and error handling
+```
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+```
+- 
