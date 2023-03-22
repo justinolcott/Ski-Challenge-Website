@@ -958,4 +958,8 @@ app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
 });
 ```
-- 
+### Debugging Node.js
+- in vs code, use f5 to debug and choose Node.js
+- you can add breakpoints
+- f5 to start debugging, f10 to step to the next line, f11 to step into a function call, f5 to continue running from the current line. Shift-f5 will stop debugging.
+- install nodemon which automatically updates the browser with npm install -g nodemon
