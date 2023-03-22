@@ -963,3 +963,41 @@ app.use(function (err, req, res, next) {
 - you can add breakpoints
 - f5 to start debugging, f10 to step to the next line, f11 to step into a function call, f5 to continue running from the current line. Shift-f5 will stop debugging.
 - install nodemon which automatically updates the browser with npm install -g nodemon
+
+
+### PM2
+- daemons will keep things running in the background
+- proces manager 2 is an easy way to start and stop our services
+- see pm2 in action with pm2 ls
+- If you want to setup another subdomain that accesses a different web service on your web server, you need to follow these steps.
+
+Add the rule to the Caddyfile to tell it how to direct requests for the domain.
+Create a directory and add the files for the web service.
+Configure PM2 to host the web service.
+
+- adds to the caddy file
+```
+tacos.cs260.click {
+  reverse_proxy _ localhost:5000
+  header Cache-Control none
+  header -server
+  header Access-Control-Allow-Origin *
+}
+```
+- 
+```
+The following is the JavaScript that causes the web service to listen on a port that is provided as an argument to the command line.
+
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+```
+- also this code enables the use of a public directory to use: app.use(express.static('public'));
+- command to start a new process, make sure you are in your services directory: 
+```
+cd ~/services/tacos
+pm2 start index.js -n tacos -- 5000
+pm2 save
+```
+- 
