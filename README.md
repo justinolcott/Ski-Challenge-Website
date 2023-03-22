@@ -1025,3 +1025,46 @@ test('testWelcomeButton', async ({ page }) => {
 });
 ```
 - Browser stack allows us to use different devices to test our code, but it costs money
+
+### Endpoint Testing
+- we are going to use jest
+- we have to export our server.js file and import the app object in the index.js file
+```
+const app = require('./server');
+
+const port = 8080;
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
+```
+- .test.js is any testing file
+- an example test:
+```
+test('that equal values are equal', () => {
+  expect(false).toBe(true);
+});
+```
+- -D means to install as a development package
+- npm install jest -D
+- Now, replace the scripts section of the package.json file with a new command that will run our tests with Jest.
+```
+"scripts": {
+  "test": "jest"
+},
+```
+- npm run test
+- supertest allows us to make HTTP requests without having to actually send them over the network: npm install supertest -D
+- example:
+```
+const request = require('supertest');
+const app = require('./server');
+
+test('getStore returns the desired store', (done) => {
+  request(app)
+    .get('/store/provo')
+    .expect(200)
+    .expect({ name: 'provo' })
+    .end((err) => (err ? done(err) : done()));
+});
+```
+- The great thing about test driven development (TDD) is that you can actually write your tests first and then write your code based upon the design represented by the tests. When your tests pass you know your code is complete. Additionally, when you make later modifications to your code you can simply run your tests again. If they pass then you can be confident that your code is still working without having to manually test everything yourself. With systems that have hundreds of endpoints and hundreds of thousands of lines of code, TDD becomes an indispensible part of the development process.
