@@ -1068,3 +1068,119 @@ test('getStore returns the desired store', (done) => {
 });
 ```
 - The great thing about test driven development (TDD) is that you can actually write your tests first and then write your code based upon the design represented by the tests. When your tests pass you know your code is complete. Additionally, when you make later modifications to your code you can simply run your tests again. If they pass then you can be confident that your code is still working without having to manually test everything yourself. With systems that have hundreds of endpoints and hundreds of thousands of lines of code, TDD becomes an indispensible part of the development process.
+
+
+## Simon Service
+- first move all the public files to a public folder like main.css, index.html, index.js, etc, etc
+- then add node by doing the following:
+  - npm init -y
+  - add node_modules to .gitignore
+  - install express with npm install express
+- create a new file in the root: index.js
+  - add the basic express code:
+  ```
+const express = require('express');
+const app = express();
+
+// The service port. In production the front-end code is statically hosted by the service on the same port.
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
+
+// JSON body parsing using built-in middleware
+app.use(express.json());
+  ```
+
+- use this code to add the public: app.use(express.static('public'));
+
+- create a router with this code, this one is used as an api to then use to update scores, I'll have to have a similar one
+```
+// Router for service endpoints
+const apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+```
+
+- this code is an example get:
+```
+// GetScores
+apiRouter.get('/scores', (_req, res) => {
+  res.send(scores);
+});
+```
+
+- we then use this one like this:
+```
+async function loadScores() {
+  const response = await fetch("/api/scores")
+  const scores = await response.json()
+```
+
+- this code is save the scores so we can go offline
+```
+async function loadScores() {
+  let scores = [];
+  try {
+    // Get the latest high scores from the service
+    const response = await fetch('/api/scores');
+    scores = await response.json();
+
+    // Save the scores in case we go offline in the future
+    localStorage.setItem('scores', JSON.stringify(scores));
+  } catch {
+    // If there was an error then just use the last saved scores
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+      scores = JSON.parse(scoresText);
+    }
+  }
+
+  displayScores(scores);
+}
+```
+
+- 
+
+- this code is an example post or king of like a send 
+```
+// SubmitScore
+apiRouter.post('/score', (req, res) => {
+  scores = updateScores(req.body, scores);
+  res.send(scores);
+});
+```
+
+- it is then used in this code:
+```
+  async saveScore(score) {
+    const userName = this.getPlayerName();
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date };
+
+    try {
+      const response = await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newScore),
+      });
+
+      // Store what the service gave us as the high scores
+      const scores = await response.json();
+      localStorage.setItem('scores', JSON.stringify(scores));
+    } catch {
+      // If there was an error then just track scores locally
+      this.updateScoresLocal(newScore);
+    }
+  }
+```
+
+- these two app calls are for handling an unknown path and then having the app listen to the correct port that we inserted earlier:
+```
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+```
+
+- 
