@@ -321,6 +321,8 @@ function reload() {
   let challengeScreen = new ChallengesScreen();
   let customChallenges = [];
   //this.reset();
+
+  updateAlertWithWeather();
 }
 
 
@@ -333,4 +335,73 @@ function clearLocalStorage() {
   localStorage.clear();
   reload();
   // Add any additional functionality here, such as resetting the page or displaying a message
+}
+
+
+// WEB SERVICES
+
+
+function displayAltaWeatherForecast() {
+  const url = 
+  fetch(`https://picsum.photos/v2/list?page=${random}&limit=1`)
+    .then((response) => response.json())
+    .then((data) => {
+      const containerEl = document.querySelector('#picture');
+
+      const width = containerEl.offsetWidth;
+      const height = containerEl.offsetHeight;
+
+      const imgUrl = `https://picsum.photos/id/${data[0].id}/${width}/${height}?grayscale`;
+      const imgEl = document.createElement('img');
+      imgEl.setAttribute('src', imgUrl);
+      containerEl.appendChild(imgEl);
+    });
+}
+
+async function getAltaWeather() {
+  const endpoint = 'https://api.weather.gov/points/40.5884,-111.6374';
+
+  return fetch(endpoint)
+    .then(response => response.json())
+    .then(data => {
+      // Extract the forecast URL from the response data
+      const forecastUrl = data.properties.forecast;
+
+      // Make a second HTTP request to get the weather forecast
+      return fetch(forecastUrl);
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Extract the weather information from the response data
+      const { temperature, detailedForecast } = data.properties.periods[0];
+
+      // Return an object containing the weather information
+      return { temperature, detailedForecast };
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+getAltaWeather()
+  .then(weather => {
+    console.log(`Temperature: ${weather.temperature}\nDescription: ${weather.detailedForecast}`);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+async function getWeatherData() {
+  const response = await fetch("https://api.weather.gov/gridpoints/SLC/108,167/forecast");
+  const data = await response.json();
+  return data;
+}
+
+async function updateAlertWithWeather() {
+  const forecastData = await getWeatherData();
+  const detailedForecast = forecastData.properties.periods[0].detailedForecast;
+
+  const alertElement = document.querySelector(".alert");
+  alertElement.innerHTML = detailedForecast;
 }

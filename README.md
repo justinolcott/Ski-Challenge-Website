@@ -1183,4 +1183,95 @@ app.listen(port, () => {
 });
 ```
 
-- 
+### Storage Services
+- we don't want to store files directly on our server because servers should be temporary and we want to have backups and we don't want the server to fail if there are too many files
+- to use AWS S3 for storage: You can find detailed information about using AWS S3 with Node.js on the AWS website. Generally, the steps you need to take include:
+
+Creating a S3 bucket to store your data in.
+Getting credentials so that your application can access the bucket.
+Using the credentials in your application.
+Using the SDK to write, list, read, and delete files from the bucket.
+
+### Data Services
+| Service       | Specialty             |
+| ------------- | --------------------- |
+| MySQL         | Relational queries    |
+| Redis         | Memory cached objects |
+| ElasticSearch | Ranked free text      |
+| MongoDB       | JSON objects          |
+| DynamoDB      | Key value pairs       |
+| Neo4J         | Graph based data      |
+| InfluxDB      | Time series data      |
+
+- sample queries in mongodb:
+```
+// find all houses
+db.house.find();
+
+// find houses with two or more bedrooms
+db.house.find({ beds: { $gte: 2 } });
+
+// find houses that are available with less than three beds
+db.house.find({ status: 'available', beds: { $lt: 3 } });
+
+// find houses with either less than three beds or less than $1000 a night
+db.house.find({ $or: [(beds: { $lt: 3 }), (price: { $lt: 1000 })] });
+
+// find houses with the text 'modern' or 'beach' in the summary
+db.house.find({ summary: /(modern|beach)/i });
+```
+- first step is install mongo with npm install mongodb
+```
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const uri = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(uri);
+```
+
+- this code is used to insert a java object
+```
+const collection = client.db('rental').collection('house');
+
+const house = {
+  name: 'Beachfront views',
+  summary: 'From your bedroom to the beach, no shoes required',
+  property_type: 'Condo',
+  beds: 1,
+};
+await collection.insertOne(house);
+```
+
+- this code is used to query:
+```
+const cursor = collection.find();
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+```
+
+- You need to protect your credentials for connecting to your Mongo database. One common mistake is to check them into your code and then post it to a public GitHub repository. Instead you can load your credentials when the application executes. One common way to do that, is to read them from environment variables. The JavaScript process.env object provides access to the environment.
+
+const userName = process.env.MONGOUSER;
+const password = process.env.MONGOPASSWORD;
+const hostname = process.env.MONGOHOSTNAME;
+
+if (!userName) {
+  throw Error("Database not configured. Set environment variables");
+}
+
+```sudo vi /etc/environment```
+```
+export MONGOUSER=<yourmongodbusername>
+export MONGOPASSWORD=<yourmongodbpassword>
+export MONGOHOSTNAME=<yourmongodbhostname>
+```
+
+```
+pm2 restart all --update-env
+pm2 save
+```
+
