@@ -403,5 +403,5 @@ async function updateAlertWithWeather() {
   const detailedForecast = forecastData.properties.periods[0].detailedForecast;
 
   const alertElement = document.querySelector(".alert");
-  alertElement.innerHTML = detailedForecast;
+  alertElement.innerHTML = "Alta's Weather: " + detailedForecast;
 }

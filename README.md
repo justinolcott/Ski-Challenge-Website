@@ -1078,7 +1078,7 @@ test('getStore returns the desired store', (done) => {
   - install express with npm install express
 - create a new file in the root: index.js
   - add the basic express code:
-  ```
+```
 const express = require('express');
 const app = express();
 
@@ -1087,7 +1087,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
-  ```
+```
 
 - use this code to add the public: app.use(express.static('public'));
 
@@ -1263,7 +1263,7 @@ if (!userName) {
   throw Error("Database not configured. Set environment variables");
 }
 
-```sudo vi /etc/environment```
+`sudo vi /etc/environment`
 ```
 export MONGOUSER=<yourmongodbusername>
 export MONGOPASSWORD=<yourmongodbpassword>
@@ -1275,3 +1275,18 @@ pm2 restart all --update-env
 pm2 save
 ```
 
+## Simon DB
+- If done correctly, the only difference between using the server as the storage and MongoDB will be the actual functions when you need data from the database. In the simon example, we simply have to change our get scores and submit scores.
+- we use `const userName = process.env.MONGOUSER;` to properly reference environment variables and keep our data secure/
+- this code sets up our connection with the MongoClient
+```
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(url);
+```
+- this code gets a collection or us to then reference. Note how they have our client, then the database 'simon' and then the collection 'score'.
+```
+const scoreCollection = client.db('simon').collection('score');
+```
+
+- 
