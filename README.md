@@ -1289,4 +1289,19 @@ const client = new MongoClient(url);
 const scoreCollection = client.db('simon').collection('score');
 ```
 
-- 
+- we can then insert with `scoreCollection.insertOne(score);`
+- and we can query with:
+```
+const query = {score: {$gt: 0}};
+  const options = {
+    sort: {score: -1},
+    limit: 10,
+  };
+  const cursor = scoreCollection.find(query, options);
+  return cursor.toArray();
+```
+
+- I was having troubles with the environment varibles, so just make sure to restart pm2 and update env var as well as saving. Sometimes, a reboot is necessary as well.
+
+
+
