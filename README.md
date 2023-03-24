@@ -1302,6 +1302,8 @@ const query = {score: {$gt: 0}};
 ```
 
 - I was having troubles with the environment varibles, so just make sure to restart pm2 and update env var as well as saving. Sometimes, a reboot is necessary as well.
-
+- you can view the collections directly in atlas on their website
+- in my project, I will need to have queries of getting the scoreboard and getting the challenges feed.
+- and then I will need inserts of creating challenges and inserts of checking off challenges
 
 
