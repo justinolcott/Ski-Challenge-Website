@@ -1306,4 +1306,113 @@ const query = {score: {$gt: 0}};
 - in my project, I will need to have queries of getting the scoreboard and getting the challenges feed.
 - and then I will need inserts of creating challenges and inserts of checking off challenges
 
+## Simon Login
+
+- include cookieParser and bcrypt 
+```
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+
+const authCookieName = 'token';
+```
+
+- code for creating an auth token for a new user
+```
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.email, req.body.password);
+
+    // Set the cookie
+    setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
+});
+```
+  - and in createUser, we hash the password and return a token via uuid:
+```
+async function createUser(email, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
+```
+  - and then we set the cookie
+```
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+```
+
+- login function which essentially checks if the hashed password matches
+```
+apiRouter.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+```
+
+- logout function which essentially just deletes the cookie
+```
+apiRouter.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
+```
+
+- a function that gets information about the user which we will use to see if the user has been logged in already initially
+```
+apiRouter.get('/user/:email', async (req, res) => {
+  const user = await DB.getUser(req.params.email);
+  if (user) {
+    const token = req?.cookies.token;
+    res.send({ email: user.email, authenticated: token === user.token });
+    return;
+  }
+  res.status(404).send({ msg: 'Unknown' });
+});
+```
+
+- and then we use a secure api router instead of a normal one
+```
+var secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+```
+
+- Essentially, we have to add the login functionality and then use a secure api to the previous functionality
+
+
 
