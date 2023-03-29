@@ -16,6 +16,7 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
+    console.log("Creating a user");
     if (await DB.getUser(req.body.username)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
@@ -31,15 +32,16 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-const user = await DB.getUser(req.body.username);
-if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-    setAuthCookie(res, user.token);
-    res.send({ id: user._id });
-    return;
+    console.log("Logging in a user");
+    const user = await DB.getUser(req.body.username);
+    if (user) {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+        setAuthCookie(res, user.token);
+        res.send({ id: user._id });
+        return;
+        }
     }
-}
-res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ msg: 'Unauthorized' });
 });
 
 apiRouter.delete('/auth/logout', (_req, res) => {
@@ -48,13 +50,14 @@ apiRouter.delete('/auth/logout', (_req, res) => {
 });
 
 apiRouter.get('/user/:username', async (req, res) => {
+    console.log("Getting user");
     const user = await DB.getUser(req.params.username);
     if (user) {
       const token = req?.cookies.token;
       res.send({ username: user.username, authenticated: token === user.token });
       return;
     }
-    res.status(404).send({ msg: 'Unknown' });
+    res.send({ authenticated: false });
 });
 
 var secureApiRouter = express.Router();
@@ -104,6 +107,14 @@ app.use((_req, res) => {
     console.log("serving default page");
     res.sendFile('index.html', { root: 'public' });
 });
+
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Listening on port ${port}`);

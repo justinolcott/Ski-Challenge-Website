@@ -53,6 +53,7 @@ function clearChallenges() {
 module.exports = {
     getUser,
     getUserByToken,
+    createUser,
     addChallenge, 
     getChallenges, 
     clearChallenges

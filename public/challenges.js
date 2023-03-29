@@ -398,6 +398,22 @@ function clearStorage() {
   reload();
 }
 
+function logout() {
+  fetch('/api/auth/logout', {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        window.location.href = '/login.html'; // Replace with your desired URL
+
+        console.error(`Failed to clear cookie. Status code: ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error('An error occurred while logging out:', error);
+    });
+}
+
 //Code that actually runs
 const dao = new DAO();
 let challengeScreen = new ChallengesScreen();
