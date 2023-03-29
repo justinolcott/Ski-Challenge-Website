@@ -1306,7 +1306,7 @@ const query = {score: {$gt: 0}};
 - in my project, I will need to have queries of getting the scoreboard and getting the challenges feed.
 - and then I will need inserts of creating challenges and inserts of checking off challenges
 
-### 
+### Authorization Services, Account Creation, and Login
 
 ## Simon Login
 
@@ -1416,5 +1416,26 @@ secureApiRouter.use(async (req, res, next) => {
 
 - Essentially, we have to add the login functionality and then use a secure api to the previous functionality
 
+## Startup Service Notes
 
+### Startup Web Service
+- move most files to a public and create an index.js
+- also init your directory with npm init -y and install express
+- I found it is very effective to create a data access class that all the other classes use to access any data that will be changing, this made it very easy to update with future commits
+- It also makes it easier to handle local file saving versus server saving
+- I did have a very strange issue where localhost would work for api calls but not for showing the website, but 127.0.0.1 would work for the website but not for api calls, essentially I added app.listen to 0.0.0.0 which allows access to all.
+- essentially to do this first step, we have the server run index.js and in it, it has a variable that stores the challenges and other data. We will replace this with the database next.
+
+### Startup Database
+- It was really easy to implement a database to the startup since a lot was already set up since the simon.
+- In the simon, we essentially created a mongodb account and set up environment variables
+- to set up the database for the startup, we created a new file called database.js
+- then I edited the index.js to change some of the end points to send and return data from database.
+
+### Startup Login
+- The login was the hardest part to implement
+- it required including a lot more to the express with endpoints to login user, create user, get user, and more.
+- it also required some authenticating users with tokens before, and then creating a secure api router.
+- it also required some thinking on my part of how I wanted to implement logging in, I decided to skip the login page if I find that they are already logged in. I didn't feel like creating a logout button, so I just added another link in the dropdown menu to logout.
+- I eventually got it working out and now I'll have to implement websockets and add saving challenges to the web service.
 
