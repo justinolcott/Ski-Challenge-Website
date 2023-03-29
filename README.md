@@ -1306,6 +1306,8 @@ const query = {score: {$gt: 0}};
 - in my project, I will need to have queries of getting the scoreboard and getting the challenges feed.
 - and then I will need inserts of creating challenges and inserts of checking off challenges
 
+### 
+
 ## Simon Login
 
 - include cookieParser and bcrypt 

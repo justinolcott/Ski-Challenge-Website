@@ -1,5 +1,17 @@
 {
   "dependencies": {
-    "bootstrap-icons": "^1.10.3"
-  }
+    "bootstrap-icons": "^1.10.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0"
+  },
+  "name": "startup",
+  "description": "**Elevator Pitch:**\r The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts! Make the best days skiing with this ski website!",
+  "version": "1.0.0",
+  "main": "challenges.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
