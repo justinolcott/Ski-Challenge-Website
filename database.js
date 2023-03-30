@@ -15,6 +15,7 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 const client = new MongoClient(url);
 const challengeCollection = client.db('startup').collection('challenges');
 const userCollection = client.db('startup').collection('users');
+const usersCollection = client.db('startup').collection('usersList');
 
 function getUser(username) {
     return userCollection.findOne({ username: username });
@@ -33,6 +34,24 @@ async function createUser(username, password) {
     };
     await userCollection.insertOne(user);
     return user;
+}
+
+async function addUser(username) {
+    console.log("adding user in db");
+    const user = {
+        username: username,
+        score: 0
+    }
+    await usersCollection.insertOne(user);
+    return user;
+}
+
+async function getUsers() {
+    console.log("getting users from db");
+    const query = {};
+    const options = {};
+    const cursor = await usersCollection.find(query, options);
+    return cursor.toArray();
 }
 
 function addChallenge(challenge) {
@@ -56,5 +75,7 @@ module.exports = {
     createUser,
     addChallenge, 
     getChallenges, 
-    clearChallenges
+    clearChallenges,
+    addUser,
+    getUsers
 };

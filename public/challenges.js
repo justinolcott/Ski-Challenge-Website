@@ -205,11 +205,12 @@ class User {
 }
 
 class Scoreboard {
-  constructor() {
+  constructor(dao) {
+    this.dao = dao;
     this.name = localStorage.getItem("userName");
     this.users = [];
-    this.addUser();
-    this.fill();
+    //this.addUser();
+    //this.fill();
     this.updateBoard();
   }
 
@@ -238,13 +239,17 @@ class Scoreboard {
     return count;
   }
 
-  updateBoard() {
+  async updateBoard() {
     console.log("Updating Board");
+    this.users = await this.dao.getUsers();
+    if (this.users == null) {
+      this.users = [];
+    }
     const scoreboardEl = document.querySelector(".scoreboard-feed");
     while (scoreboardEl.firstChild) {
       scoreboardEl.removeChild(scoreboardEl.firstChild);
     }
-    this.user.score = this.getPoints();
+    //this.user.score = this.getPoints();
     function compare(a, b) {
       if (a.score < b.score) {
         return 1;
@@ -254,10 +259,11 @@ class Scoreboard {
       }
       return 0;
     }
+    console.log(this.users);
     this.users.sort(compare);
     
     for (let u in this.users) {
-      scoreboardEl.appendChild(this.users[u].createElement());
+      scoreboardEl.appendChild(new User(this.users[u].username, this.users[u].score).createElement());
     }
   }
 
@@ -271,7 +277,7 @@ class ChallengesScreen {
   constructor() {
     console.log("New Challenges Screen");
     this.dao = dao;
-    this.board = new Scoreboard();
+    this.board = new Scoreboard(this.dao);
     this.completedChallenges = new CompletedChallenges();
     this.feed = new Feed(this.completedChallenges, this.dao);
     this.board.addYourChallenges(this.completedChallenges);
@@ -303,8 +309,29 @@ class DAO {
     this.users = [];
   }
 
+ 
+
   loadData() {
     this.loadChallenges();
+  }
+
+  async getUsers() {
+    console.log("Getting users in dao");
+    let users = [];
+    const savedUsers = localStorage.getItem("usersList");
+    if (savedUsers) {
+      users = JSON.parse(savedUsers);
+    }
+    try {
+      const response = await fetch('/api/users');
+      users = await response.json();
+      console.log("Users in dao:", users);
+      localStorage.setItem('usersList', JSON.stringify(this.users));
+    } catch {
+      const savedUsers = localStorage.getItem("usersList");
+    }
+    this.users = users;
+    return this.users;
   }
 
   async clearData() {

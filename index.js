@@ -21,7 +21,7 @@ apiRouter.post('/auth/create', async (req, res) => {
       res.status(409).send({ msg: 'Existing user' });
     } else {
       const user = await DB.createUser(req.body.username, req.body.password);
-  
+      await DB.addUser(req.body.username);
       // Set the cookie
       setAuthCookie(res, user.token);
   
@@ -74,6 +74,23 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 
+//Users for scoreboard
+apiRouter.get('/users', async (_req, res) => {
+  console.log("get users");
+  const users = await DB.getUsers();
+  console.log(users);
+  res.send(users);
+});
+
+// secureApiRouter.post('/newUser', async (req, res) => {
+//   console.log("adding user");
+//   DB.addUser(req.body);
+//   const users = await DB.getUsers();
+//   res.send(users);
+// });
+
+
+//Challenges for feed
 secureApiRouter.get('/challenges', async (_req, res) => {
     console.log("get challenges");
     const challenges = await DB.getChallenges();
@@ -84,7 +101,6 @@ secureApiRouter.post('/newChallenge', async (req, res) => {
     console.log("add challenge");
     DB.addChallenge(req.body);
     const challenges = await DB.getChallenges();
-    //challenges = addChallenge(req.body, challenges);
     res.send(challenges);
 });
 
