@@ -1276,6 +1276,7 @@ pm2 save
 ```
 
 ## Simon DB
+- I learned how I can use a database to store data not on the server itself. I learned how to properly set up data management, so it is very easy to implement a database. I also learned how to properly manager environment variables to keep usernames and passwords secure. 
 - If done correctly, the only difference between using the server as the storage and MongoDB will be the actual functions when you need data from the database. In the simon example, we simply have to change our get scores and submit scores.
 - we use `const userName = process.env.MONGOUSER;` to properly reference environment variables and keep our data secure/
 - this code sets up our connection with the MongoClient
@@ -1309,7 +1310,7 @@ const query = {score: {$gt: 0}};
 ### Authorization Services, Account Creation, and Login
 
 ## Simon Login
-
+- I learned how we use hash to not save passwords, to use uuid for tokens, how we can use cookies to save tokens, and how we can use authentification to then create a secure api router.
 - include cookieParser and bcrypt 
 ```
 const cookieParser = require('cookie-parser');
@@ -1573,6 +1574,10 @@ const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 - and then the on message function, we get the message and call the display message function
 - the display message function simply adds html to the #play-message div
 - the last function is a broadcastEvent function which is the send. It takes makes a little event function and then calls: `this.socket.send(JSON.stringify(event));`
+
+- I learned how to set up a server and client side websocket and how a server can connect multiple clients by having websockets with each. I learned its can be pretty simple to implement websockets and how effective they are in certain use cases.
+
+
 
 
 
