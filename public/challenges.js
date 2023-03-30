@@ -9,12 +9,15 @@ class Challenge {
 }
 
 class CompletedChallenges {
-  constructor() {
+  constructor(dao) {
     this.challenges = [];
+    this.dao = dao;
+    this.name = localStorage.getItem("userName");
   }
 
-  add(challenge) {
+  async add(challenge) {
     this.challenges.push(challenge);
+    await this.dao.setCompletedChallenges(this.name, this.challenges);
   }
 
   addFeed(feed) {
@@ -31,6 +34,7 @@ class CompletedChallenges {
 
 
   createElement(challenge) {
+    console.log("Creating element", challenge);
     const challengeEl = document.createElement('div');
     challengeEl.classList.add('border-top', 'challenge', 'your-challenge');
     challengeEl.setAttribute('name', challenge.challengeName);
@@ -65,22 +69,31 @@ class CompletedChallenges {
     return challengeEl;
   }
 
-  updateFeed() {
+  async updateFeed() {
+    this.challenges = await this.dao.getCompletedChallenges(this.name);
+    console.log("Challenges in updatefeed", this.challenges);
     const feedEl = document.querySelector(".your-challenges");
+
+    //delete feed
     while (feedEl.firstChild) {
       feedEl.removeChild(feedEl.firstChild);
     }
 
+    //this.challenges = DB.get
+
+    //create feed
     for (let challengeKey in this.challenges) {
       let challenge = this.challenges[challengeKey];
       
       let child = this.createElement(challenge);
       feedEl.appendChild(child);
     }
+
+    //update the scoreboard as well
     this.board.updateBoard();
   }
 
-  removeChallenge(challenge) {
+  async removeChallenge(challenge) {
     for (let i = 0; i < this.challenges.length; i++) {
       if (this.challenges[i].challengeName === challenge.challengeName) {
         const index = i;
@@ -89,8 +102,13 @@ class CompletedChallenges {
         }
       }
     }
+
+    this.challenges = await this.dao.setCompletedChallenges(this.name, this.challenges);
+
+    //uncheck it in the feed as well
     this.feed.uncheck(challenge);
 
+    //update the yourchallenges
     this.updateFeed();
   }
 }
@@ -179,6 +197,7 @@ class Feed {
       this.yourChallenges.updateFeed();
     }
   }
+
   uncheck(challenge) {
     const checkbox = document.querySelector(`.challenges-feed [name="${challenge.challengeName}"] input[type="checkbox"]`);
     checkbox.checked = false;
@@ -241,10 +260,22 @@ class Scoreboard {
 
   async updateBoard() {
     console.log("Updating Board");
-    this.users = await this.dao.getUsers();
-    if (this.users == null) {
-      this.users = [];
+    
+    //get users the first time... we will try to use websockets for the rest
+    if (this.users == null || this.users.length == 0) {
+      this.users = this.users = await this.dao.getUsers();
     }
+
+    console.log(this.users);
+    for (var i = 0; i < this.users.length; i++) {
+      console.log(this.users[i].username);
+      if (this.users[i].username == this.name) {
+        console.log("Setting this user: ", this.name);
+        this.users[i].score = this.getPoints();
+      }
+    }
+
+
     const scoreboardEl = document.querySelector(".scoreboard-feed");
     while (scoreboardEl.firstChild) {
       scoreboardEl.removeChild(scoreboardEl.firstChild);
@@ -278,7 +309,7 @@ class ChallengesScreen {
     console.log("New Challenges Screen");
     this.dao = dao;
     this.board = new Scoreboard(this.dao);
-    this.completedChallenges = new CompletedChallenges();
+    this.completedChallenges = new CompletedChallenges(this.dao);
     this.feed = new Feed(this.completedChallenges, this.dao);
     this.board.addYourChallenges(this.completedChallenges);
     this.feed.addScoreboard(this.board);
@@ -361,8 +392,29 @@ class DAO {
     })
   }
 
-  setCompletedChallenges(completedChallenges) {
-    this.completedChallenges = completedChallenges;
+  async setCompletedChallenges(username, completedChallenges) {
+    console.log("setting completed challenges");
+    const response = await fetch('/api/setCompletedChallenges', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        completedChallenges: completedChallenges
+      })
+    });
+    this.completedChallenges = await response.json();
+    console.log(this.completedChallenges)
+    return this.completedChallenges;
+  }
+
+  async getCompletedChallenges(username) {
+    console.log("Getting challenges", username);
+    const response = await fetch(`/api/completedChallenges/${username}`);
+    this.completedChallenges = await response.json();
+    console.log(this.completedChallenges);
+    return this.completedChallenges.completedChallenges;
   }
 
   async getChallenges() {

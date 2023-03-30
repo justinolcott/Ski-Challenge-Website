@@ -16,6 +16,7 @@ const client = new MongoClient(url);
 const challengeCollection = client.db('startup').collection('challenges');
 const userCollection = client.db('startup').collection('users');
 const usersCollection = client.db('startup').collection('usersList');
+const completedCollection = client.db('startup').collection('completedChallenges');
 
 function getUser(username) {
     return userCollection.findOne({ username: username });
@@ -67,6 +68,24 @@ function getChallenges() {
 
 function clearChallenges() {
     challengeCollection.deleteMany({});
+    userCollection.deleteMany({});
+    usersCollection.deleteMany({});
+    completedCollection.deleteMany({});
+}
+
+async function setCompletedChallenges(username, completedChallenges) {
+    const completed = await completedCollection.findOneAndUpdate(
+        { username: username },
+        { $set: { completedChallenges: completedChallenges }},
+        { upsert: true, returnOriginal: false }
+    );
+    return completed;
+}
+
+async function getCompletedChallenges(username) {
+    const completedChallenges = await completedCollection.findOne({username: username});
+    console.log(completedChallenges);
+    return completedChallenges;
 }
 
 module.exports = {
@@ -77,5 +96,7 @@ module.exports = {
     getChallenges, 
     clearChallenges,
     addUser,
-    getUsers
+    getUsers,
+    setCompletedChallenges,
+    getCompletedChallenges
 };

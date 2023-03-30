@@ -3,6 +3,7 @@ const app = express();
 const DB = require('./database.js');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const req = require('express/lib/request.js');
 const authCookieName = 'token';
 
 
@@ -108,6 +109,21 @@ secureApiRouter.delete('/clearChallenges', async (req, res) => {
     console.log("Clear");
     await DB.clearChallenges();
 });
+
+secureApiRouter.get('/completedChallenges/:username', async (req, res) => {
+  console.log("Getting completed challenges");
+  const completedChallenges = await DB.getCompletedChallenges(req.params.username);
+  console.log(completedChallenges);
+  res.send(completedChallenges);
+});
+
+secureApiRouter.post('/setCompletedChallenges', async (req, res) => {
+  console.log("adding completed challenges");
+  const completedChallenges = await DB.setCompletedChallenges(req.body.username, req.body.completedChallenges);
+  res.send(completedChallenges);
+});
+
+
 
 // function addChallenge(newChallenge, challenges) {
 //     if (challenges.length == 0) {
