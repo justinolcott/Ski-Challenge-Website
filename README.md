@@ -1439,3 +1439,112 @@ secureApiRouter.use(async (req, res, next) => {
 - it also required some thinking on my part of how I wanted to implement logging in, I decided to skip the login page if I find that they are already logged in. I didn't feel like creating a logout button, so I just added another link in the dropdown menu to logout.
 - I eventually got it working out and now I'll have to implement websockets and add saving challenges to the web service.
 
+
+### Websock Notes
+- how to start a websocket:
+```
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+### Debuggin Websocket
+- You can debug the client in chrome and the server with node.js debugger
+- to get websocket do npm install ws
+- you can open chrome debugger with f12
+- go to the network tab and then messages tab to view websocket messages
+![a good example of debugging](https://github.com/webprogramming260/.github/raw/main/profile/webServices/webSocket/webServicesWebSocketClientDebug.gif)
+
+
+### Websocket chat
+- if it is non-secure http, us ws, otherwise wss
+- and we can get the location by referencing where we got the html from:
+```
+// Adjust the webSocket protocol to what is being used for HTTP
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+// Display that we have opened the webSocket
+socket.onopen = (event) => {
+  appendMsg('system', 'websocket', 'connected');
+};
+```
+- and this is what the receiving side can look like:
+```
+socket.onmessage = async (event) => {
+  const text = await event.data.text();
+  const chat = JSON.parse(text);
+  appendMsg('friend', chat.name, chat.msg);
+};
+```
+- socket.onclose = anon function to do things on close for any reason
+
+- code to handle the upgrade ourselves: btw the server is the app.listen on a port....
+```
+// Create a websocket object
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle the protocol upgrade from HTTP to WebSocket
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.emit('connection', ws, request);
+  });
+});
+```
+- as a server, we will manage a bunch of connections... add a connection to a list of connections when connected and remove it on close and when we receive a message, forward it to all but the sender as follows:
+```
+// Keep track of all the connections so we can forward messages
+let connections = [];
+
+wss.on('connection', (ws) => {
+  const connection = { id: connections.length + 1, alive: true, ws: ws };
+  connections.push(connection);
+
+  // Forward messages to everyone except the sender
+  ws.on('message', function message(data) {
+    connections.forEach((c) => {
+      if (c.id !== connection.id) {
+        c.ws.send(data);
+      }
+    });
+  });
+
+  // Remove the closed connection so we don't try to forward anymore
+  ws.on('close', () => {
+    connections.findIndex((o, i) => {
+      if (o.id === connection.id) {
+        connections.splice(i, 1);
+        return true;
+      }
+    });
+  });
+});
+```
+
+- this code keeps connections alive using ping and pong every 10 seconds:
+```
+setInterval(() => {
+  connections.forEach((c) => {
+    // Kill any connection that didn't respond to the ping last time
+    if (!c.alive) {
+      c.ws.terminate();
+    } else {
+      c.alive = false;
+      c.ws.ping();
+    }
+  });
+}, 10000);
+
+// Respond to pong messages by marking the connection alive
+ws.on('pong', () => {
+  connection.alive = true;
+});
+```
+- all the code is found here: [Github](https://github.com/webprogramming260/websocket-chat)
+
+
+## Simon Websocket notes 
+
