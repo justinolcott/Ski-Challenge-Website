@@ -1547,4 +1547,32 @@ ws.on('pong', () => {
 
 
 ## Simon Websocket notes 
+- at the very end of index.js we will create a new PeerProxy passing it the httpServer
+
+- in the constructor, we create a new websocket with no server
+- we then handle the upgrade
+- we then keep track of connections by adding on a connection and removing when closed
+- we also forward messages on message to all but the sender
+- we also respond to pong messages and set the connection.alive = true
+- we also add a setInterval connection to keep connections alive
+
+- we added a small div in play.html to then reference and add elements too
+
+- we then have three functions in play.js with one private variable socket to reference.
+- the first function configureWebScket() sets up the connection
+```
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.displayMsg('system', 'game', 'connected');
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg('system', 'game', 'disconnected');
+    };
+```
+- and then the on message function, we get the message and call the display message function
+- the display message function simply adds html to the #play-message div
+- the last function is a broadcastEvent function which is the send. It takes makes a little event function and then calls: `this.socket.send(JSON.stringify(event));`
+
+
 
