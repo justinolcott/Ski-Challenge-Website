@@ -37,6 +37,17 @@ async function createUser(username, password) {
     return user;
 }
 
+async function setUserScore(username, score) {
+    console.log(username, score);
+    const completed = await usersCollection.findOneAndUpdate(
+        { username: username },
+        { $set: { score: score }},
+        { upsert: true, returnOriginal: false }
+    );
+    console.log(completed);
+    return completed;
+}
+
 async function addUser(username) {
     console.log("adding user in db");
     const user = {
@@ -98,5 +109,6 @@ module.exports = {
     addUser,
     getUsers,
     setCompletedChallenges,
-    getCompletedChallenges
+    getCompletedChallenges,
+    setUserScore
 };

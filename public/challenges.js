@@ -13,6 +13,7 @@ class CompletedChallenges {
     this.challenges = [];
     this.dao = dao;
     this.name = localStorage.getItem("userName");
+    this.updateFeed();
   }
 
   async add(challenge) {
@@ -70,7 +71,11 @@ class CompletedChallenges {
   }
 
   async updateFeed() {
+    console.log("NAME", this.name);
     this.challenges = await this.dao.getCompletedChallenges(this.name);
+    if (this.challenges == null) {
+      this.challenges = [];
+    }
     console.log("Challenges in updatefeed", this.challenges);
     const feedEl = document.querySelector(".your-challenges");
 
@@ -184,6 +189,7 @@ class Feed {
       let child = this.createElement(challenge);
       feedEl.appendChild(child);
     }
+    this.checkChallenges();
     this.board.updateBoard();
   }
 
@@ -201,6 +207,31 @@ class Feed {
   uncheck(challenge) {
     const checkbox = document.querySelector(`.challenges-feed [name="${challenge.challengeName}"] input[type="checkbox"]`);
     checkbox.checked = false;
+  }
+
+  async checkChallenges() {
+    console.log("Checking challenges");
+
+    this.username = localStorage.getItem("userName");
+    console.log("name", this.username);
+    const completedChallenges = await this.dao.getCompletedChallenges(this.username);
+    console.log("Checking completed challenges");
+    console.log(completedChallenges);
+    if (completedChallenges == null || completedChallenges.length == 0) {
+      return;
+    }
+    console.log("Checking challenges", completedChallenges[0]);
+    for (let i = 0; i < completedChallenges.length; i++) {
+      console.log(completedChallenges[i].challengeName);
+      this.check(completedChallenges[i].challengeName);
+    }
+  }
+
+  check(challengeName) {
+    const checkbox = document.querySelector(`.challenges-feed [name="${challengeName}"] input[type="checkbox"]`);
+    if (checkbox != null) {
+      checkbox.checked = true;
+    }
   }
 }
 
@@ -255,6 +286,7 @@ class Scoreboard {
       }
       console.log(count);
     }
+    this.dao.setUserScore(this.name, count);
     return count;
   }
 
@@ -365,6 +397,21 @@ class DAO {
     return this.users;
   }
 
+  async setUserScore(username, score) {
+    console.log("setting user score");
+    const response = await fetch('/api/setUserScore', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        score: score
+      })
+    });
+    console.log(await response.json());
+  }
+
   async clearData() {
     await this.clearChallenges();
   }
@@ -412,9 +459,21 @@ class DAO {
   async getCompletedChallenges(username) {
     console.log("Getting challenges", username);
     const response = await fetch(`/api/completedChallenges/${username}`);
-    this.completedChallenges = await response.json();
-    console.log(this.completedChallenges);
-    return this.completedChallenges.completedChallenges;
+    if (!response) {
+      console.log("GET no response");
+      return;
+    }
+
+    try {
+      console.log("GET success");
+      this.completedChallenges = await response.json();
+      console.log(this.completedChallenges);
+      return this.completedChallenges.completedChallenges;
+    }
+    catch {
+      console.log("GET Error");
+      return null;
+    }
   }
 
   async getChallenges() {

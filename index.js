@@ -83,6 +83,12 @@ apiRouter.get('/users', async (_req, res) => {
   res.send(users);
 });
 
+secureApiRouter.post('/setUserScore', async (req, res) => {
+  console.log("adding userScore");
+  const score = await DB.setUserScore(req.body.username, req.body.score);
+  res.send(score);
+});
+
 // secureApiRouter.post('/newUser', async (req, res) => {
 //   console.log("adding user");
 //   DB.addUser(req.body);
