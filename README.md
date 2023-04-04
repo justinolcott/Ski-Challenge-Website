@@ -1577,7 +1577,40 @@ const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 
 - I learned how to set up a server and client side websocket and how a server can connect multiple clients by having websockets with each. I learned its can be pretty simple to implement websockets and how effective they are in certain use cases.
 
+## React
 
+### Reactivity
+- so in react, we have little components like:
+```
+const Survey = () => {
+  const [color, updateColor] = React.useState('#737AB0');
+
+  // When the color changes update the state
+  const onChange = (e) => {
+    updateColor(e.target.value);
+  };
+  return (
+    <div>
+      <h1>Survey</h1>
+      {/* Pass the Survey color state as a property to the Question.
+          When to color changes the Question property will also be updated and rendered. */}
+      <Question color={color} />
+
+      <p>
+        <span>Pick a color: </span>
+        {/* Pass the Survey color state as a property to the input element.
+            When to color changes, the input property will also be updated and rendered. */}
+        <input type='color' onChange={(e) => onChange(e)} value={color} />
+      </p>
+    </div>
+  );
+};
+```
+
+- in a component wwe have a some variables and little functions as well as some default values. Usually these components will return some html, so in this last example, the component survey doesn't take any input variables, but then it has a variable text and a function to update that variable with the default variable of #737AB0.
+- we then define a function that updates the variable on change which is called in the returned html
+- lastly, we return html which is pretty basic besides having another react component in it and an input variable that calls the function we just made
+- that was what I learned from this assignment and these principles can be applied in the future.
 
 
 
