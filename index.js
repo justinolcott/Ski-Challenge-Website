@@ -4,6 +4,7 @@ const DB = require('./database.js');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const req = require('express/lib/request.js');
+const { PeerProxy } = require('./peerProxy.js');
 const authCookieName = 'token';
 
 
@@ -129,18 +130,6 @@ secureApiRouter.post('/setCompletedChallenges', async (req, res) => {
   res.send(completedChallenges);
 });
 
-
-
-// function addChallenge(newChallenge, challenges) {
-//     if (challenges.length == 0) {
-//         //challenges = fill(challenges);
-//     }
-//     challenges.push(newChallenge);
-//     return challenges;
-// }
-
-
-
 app.use((_req, res) => {
     console.log("serving default page");
     res.sendFile('index.html', { root: 'public' });
@@ -158,29 +147,4 @@ app.listen(port, '0.0.0.0', () => {
     console.log(`Listening on port ${port}`);
 });
 
-
-
-
-// //CHALLENGES
-// class Challenge {
-//     constructor(challengeName, icon, header, body, points) {
-//         this.challengeName = challengeName;
-//         this.icon = icon;
-//         this.header = header;
-//         this.body = body;
-//         this.points = points;
-//     }
-// }
-
-// function fill(challenges) {
-//     challenges.push(new Challenge("FrequentFlier", " ", "Frequent Flier", "Ski every single lift at any resort", 400));
-//     challenges.push(new Challenge("DotHopper", " ", "Dot Hopper", "Ski at every Ikon resort in Utah", 600));
-//     challenges.push(new Challenge("NinetoFive", " ", "The Nine to Five", "Ski at every Ikon resort in Utah", 200));
-//     challenges.push(new Challenge("ThePeakHunter", " ", "The Peak Hunter", "Ski the highest peak at every resort in your state", 400));
-//     challenges.push(new Challenge("TheDistanceSkier", " ", "The Distance Skier", "Ski 500 miles or more in one season", 600));
-//     challenges.push(new Challenge("TheSnowboarder", " ", "The Snowboarder", "Learn how to snowboard and successfully ride down at least one intermediate run", 200));
-//     //challenges.push(new Challenge("Test", "", "Test Header", "Test Description", 100));
-//     return challenges;
-// }
-
-
+new PeerProxy(httpService);
