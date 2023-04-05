@@ -7,25 +7,31 @@ class Challenge {
       this.points = points;
     }
 }
+class MyWebSocket {
+  constructor() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      //this.displayMsg('system', 'connected');
+    };
+    this.socket.onclose = (event) => {
+      //this.displayMsg('system', 'disconnected');
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      //this.displayMsg(msg.from, msg.value)
+    };
+  }
 
-// function createNewChallengeLocal() {
-//     const nameEl = document.querySelector("#challengeNameForm");
-//     const descEl = document.querySelector("#challengeDescriptionForm");
-//     const pointEl = document.querySelector("#challengePointForm");
-//     let str = nameEl.value;
-//     str = str.replace(/\s/g, '');
-//     let customChallenges = [];
-//     customChallenges = JSON.parse(localStorage.getItem("customChallenges"));
-//     if (customChallenges === null) {
-//         customChallenges = [];
-//     }
-//     const customChallenge = new Challenge(str, " ", nameEl.value, descEl.value, pointEl.value);
-//     customChallenges.push(customChallenge);
-//     console.log("Length" + customChallenges.length);
-//     localStorage.setItem("customChallenges", JSON.stringify(customChallenges));
-//     window.location.href = "challenges.html";
-// }
-
+  broadcastEvent(from, value) {
+    const event = {
+      from: from,
+      value: value,
+    };
+    this.socket.send(JSON.stringify(event));
+  }
+}
+const socket = new MyWebSocket();
 function createNewChallenge() {
   const nameEl = document.querySelector("#challengeNameForm");
     const descEl = document.querySelector("#challengeDescriptionForm");
@@ -36,8 +42,13 @@ function createNewChallenge() {
 
     const customChallenge = new Challenge(str, " ", nameEl.value, descEl.value, pointEl.value);
     saveNewChallenge(customChallenge);
+    const username = localStorage.getItem("userName");
+    socket.broadcastEvent(username, "Created a new challenge");
+
     window.location.href = "challenges.html";
 }
+
+
 
 async function saveNewChallenge(challenge) {
   console.log("saving new challenge");

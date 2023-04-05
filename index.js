@@ -8,7 +8,7 @@ const { PeerProxy } = require('./peerProxy.js');
 const authCookieName = 'token';
 
 
-const port = process.argv.length > 2 ? process.argv[2] : 5500;
+const port = process.argv.length > 2 ? process.argv[2] : 5555;
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser());
@@ -143,8 +143,8 @@ function setAuthCookie(res, authToken) {
     });
   }
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Listening on port ${port}`);
-});
 
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 new PeerProxy(httpService);

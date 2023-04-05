@@ -119,10 +119,12 @@ class CompletedChallenges {
 }
 
 class Feed {
-  constructor(completedChallenges, dao) {
+  constructor(completedChallenges, dao, socket) {
     this.dao = dao;
     this.challenges = [];
     this.yourChallenges = completedChallenges;
+    this.socket = socket;
+    this.name = localStorage.getItem("userName");
   }
 
 
@@ -202,11 +204,15 @@ class Feed {
       this.yourChallenges.removeChallenge(challenge);
       this.yourChallenges.updateFeed();
     }
+    const msg = "Score changed to " + this.board.getPoints();
+    this.socket.broadcastEvent(this.name, msg);
   }
 
   uncheck(challenge) {
     const checkbox = document.querySelector(`.challenges-feed [name="${challenge.challengeName}"] input[type="checkbox"]`);
     checkbox.checked = false;
+    const msg = "Score changed to " + this.board.getPoints();
+    this.socket.broadcastEvent(this.name, msg);
   }
 
   async checkChallenges() {
@@ -255,8 +261,9 @@ class User {
 }
 
 class Scoreboard {
-  constructor(dao) {
+  constructor(dao, socket) {
     this.dao = dao;
+    this.socket = socket;
     this.name = localStorage.getItem("userName");
     this.users = [];
     //this.addUser();
@@ -287,6 +294,10 @@ class Scoreboard {
       console.log(count);
     }
     this.dao.setUserScore(this.name, count);
+    if (count === NaN) {
+      return 0;
+    }
+
     return count;
   }
 
@@ -340,15 +351,22 @@ class ChallengesScreen {
   constructor() {
     console.log("New Challenges Screen");
     this.dao = dao;
-    this.board = new Scoreboard(this.dao);
+    this.socket = new MyWebSocket();
+
+    this.board = new Scoreboard(this.dao, this.socket);
     this.completedChallenges = new CompletedChallenges(this.dao);
-    this.feed = new Feed(this.completedChallenges, this.dao);
+    this.feed = new Feed(this.completedChallenges, this.dao, this.socket);
     this.board.addYourChallenges(this.completedChallenges);
     this.feed.addScoreboard(this.board);
     this.completedChallenges.addScoreboard(this.board);
     this.completedChallenges.addFeed(this.feed);
-    this.feed.updateFeed();   
+    
+    this.feed.updateFeed();  
+    
+
   }
+
+  
 }
 
 Storage.prototype.setObj = function(key, obj) {
@@ -483,47 +501,39 @@ class DAO {
 }
 
 
-//ALTA API
-class AltaWeather {
-  // async getAltaWeather() {
-  //   const endpoint = 'https://api.weather.gov/points/40.5884,-111.6374';
-  
-  //   return fetch(endpoint)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       // Extract the forecast URL from the response data
-  //       const forecastUrl = data.properties.forecast;
-  
-  //       // Make a second HTTP request to get the weather forecast
-  //       return fetch(forecastUrl);
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       // Extract the weather information from the response data
-  //       const { temperature, detailedForecast } = data.properties.periods[0];
-  
-  //       // Return an object containing the weather information
-  //       return { temperature, detailedForecast };
-  //     })
-  //     .catch(error => {
-  //       console.error('Error:', error);
-  //     });
-  // }
-
-  static async getWeatherData() {
-    const response = await fetch("https://api.weather.gov/gridpoints/SLC/108,167/forecast");
-    const data = await response.json();
-    return data;
+//Websocket
+class MyWebSocket {
+  constructor() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.displayMsg('system', 'connected');
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg('system', 'disconnected');
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      this.displayMsg(msg.from, msg.value)
+    };
   }
-  
-  static async updateAlertWithWeather() {
-    const forecastData = await this.getWeatherData();
-    const detailedForecast = forecastData.properties.periods[0].detailedForecast;
-  
-    const alertElement = document.querySelector(".alert");
-    alertElement.innerHTML = "Alta's Weather: " + detailedForecast;
+
+
+  displayMsg(from, msg) {
+    const alertText = document.querySelector('#challenge-alert');
+    alertText.innerHTML = `${from}: ${msg}`;
+  }
+
+  broadcastEvent(from, value) {
+    const event = {
+      from: from,
+      value: value,
+    };
+    this.socket.send(JSON.stringify(event));
   }
 }
+
+
 
 function reload() {
   console.log("Reload");
@@ -556,4 +566,3 @@ function logout() {
 const dao = new DAO();
 let challengeScreen = new ChallengesScreen();
 //window.onload = reload();
-AltaWeather.updateAlertWithWeather();
