@@ -1612,5 +1612,16 @@ const Survey = () => {
 - lastly, we return html which is pretty basic besides having another react component in it and an input variable that calls the function we just made
 - that was what I learned from this assignment and these principles can be applied in the future.
 
+## Startup Websocket Notes
+- to implement websockets, and that is a websocket that connects to the server who then forwards messages to all other users, we have two parts.
+  - The first part is to create a peer proxy for the server to run which essentially keeps a websocket open with each user and forwards messages to all other users
+  - The other part is on the client side. Essentially you setup the websocket, and have two functions:
+    - The first function is to handle receive messages and in my code, this is seen in the alerts at the top of the screen
+    - The second function is to send messages, that is seen with the broadcastEvent function
+
+## Startup Web Service Notes to Grader
+- The third party endpoints are on the homescreen in the alerts, it should show the weather for Alta
+- The other thing is that on the Challenges page, sometimes you have to wait before checking off different challenges for the scoreboard to correctly load
+
 
 
