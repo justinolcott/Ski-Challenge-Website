@@ -1624,4 +1624,67 @@ const Survey = () => {
 - The other thing is that on the Challenges page, sometimes you have to wait before checking off different challenges for the scoreboard to correctly load
 
 
+### Hook Notes
+- we can use hooks to to be able to do everything that a class style component can do and more.
+- in the following example, the useEffect on happens when the count1 variable is clicked
+```
+function UseEffectHookDemo() {
+  const [count1, updateCount1] = React.useState(0);
+  const [count2, updateCount2] = React.useState(0);
 
+  React.useEffect(() => {
+    console.log(`count1 effect triggered ${count1}`);
+  }, [count1]);
+
+  return (
+    <ol>
+      <li onClick={() => updateCount1(count1 + 1)}>Item 1 - {count1}</li>
+      <li onClick={() => updateCount2(count2 + 1)}>Item 2 - {count2}</li>
+    </ol>
+  );
+}
+
+ReactDOM.render(<UseEffectHookDemo />, document.getElementById('root'));
+```
+### Toolchains
+- This is directly from the source: 
+As web programming becomes more and more complex it became necessary to abstract away some of that complexity with a series of tools. Some common functional pieces in a web application chain include:
+
+Code repository - Stores code in a shared, versioned, location.
+Linter - Removes, or warns, of non-idiomatic code usage.
+Prettier - Formats code according to a shared standard.
+Transpiler - Compiles code into a different format. For example, from JSX to JavaScript.
+Polyfill - Generates backward compatible code for supporting old browser versions that do not support the latest standards.
+Bundler - Packages code into bundles for delivery to the browser. This enables compatibility (for example with ES6 module support), or performance (with lazy loading).
+Minifier - Removes whitespace and renames variables in order to make code smaller and more efficient to deploy.
+Testing - Automated tests at multiple levels to ensure correctness.
+Deployment - Automated packaging and delivery of code from the development environment to the production environment.
+The toolchain that we use for our React project consists of GitHub as the code repository, Babel for transpiling, WebPack for polyfill, bundling, and minifying, and finally a simple bash script (deployReact.sh) for deployment.
+
+You don't have to fully understand what each of these pieces in the chain are accomplishing, but the more you know about them the more you can optimize your development efforts.
+
+### React
+- There is nothing that create-react-app does that you should consider off limits for change or improvement. If you take the time to understand what it is doing and why, then you should feel free to customize the application to how you would like it to work. At a basic level you should always do the following:
+
+Replace the icon files with your own icons
+Modify the manifest.json and package.json to contain your application name
+Modify the README.md to describe your application
+Modify index.html to contain a proper title and description metadata.
+
+- As an example of more extension modifications, we can remove the testing and performance packages that create-react-app included in the template. You might do this because you are trying to simplify the project for demonstration purposes, or because you want to replace it with a different testing framework such as Playwright.
+
+To make this change, we first use NPM to uninstall the @testing-library packages. This removes the packages from package.json so that they are no longer installed in node_modules when you run npm install.
+
+npm uninstall @testing-library/jest-dom @testing-library/react @testing-library/user-event
+Next delete the test JavaScript files setupTest.js and App.test.js. With the testing packages gone, nothing will call this code and so we can simply delete it.
+
+rm src/setupTests.js src/App.test.js
+We can also remove the performance reporting package and code in order to simplify our application even further.
+
+npm uninstall web-vitals
+rm src/reportWebVitals.js
+Finally, we remove the references to reportWebVitals from index.js since that package is no longer available.
+
+If you want to strip the project down even more, you can also delete the robots.txt, manifest.json, and the logo*.png files.
+
+- from my own tinkering, I found the React CLI of npm very nice. It is extremely easy to start an app and insert my own components, styling, etc and then start the app in a development environment as well as then exporting it to a production environment.
