@@ -1,21 +1,36 @@
 {
+  "name": "template-react",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "bootstrap-icons": "^1.10.3",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.18.2",
-    "mongodb": "^5.1.0",
-    "uuid": "^9.0.0",
-    "ws": "^8.13.0"
+    "bootstrap": "^5.2.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
   },
-  "name": "startup",
-  "description": "**Elevator Pitch:**\r The greatest thing on Earth just got better with the ultimate ski planning website! Stay on top of the latest powder alerts and conditions at your favorite resorts and even backcountry areas. Plus, everything you need to plan an iconic day of skiing including coordination with friends, polls for deciding where to go, and other functions from carpooling, setting available days, which passes you have, road conditions, and of course, powder alerts! Make the best days skiing with this ski website!",
-  "version": "1.0.0",
-  "main": "challenges.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
