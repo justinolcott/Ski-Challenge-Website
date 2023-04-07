@@ -1749,4 +1749,58 @@ root.render(
 ```
 
 ## Simon React
-- 
+- When setting up startup, we will seperate our project into two areas, one for the service and another for the source. In service, and the startup directory, I'll have to run npm install and that make sure both are running
+- since the app is running seperately from service, we need to have a proxy in the app to send requests to the correct port.
+- get everything sorted into the correct folders, namely the src folder will have all the code, the service folder contains the service, and public contains all the assets, favicon, manifest.json, and the index.html root.
+
+### Index.jsx
+- this file is really simple, it enables the React Router
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './app';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+```
+### Bootstrap
+- throughout we will have to import bootstrap
+### App
+- in the App, we first have a component with two states, userName and authState. We do a useEffect to immediately send a request to see if the user is authenticated.
+- we then return the header and the footer, with the routes in between
+- each route represents our different pages
+- we also have to slightly change our header to have navlinks instead of just links
+
+
+### About.jsx
+- in the about we have a one time api call, so we do another useEffect, but pass it an empty dependency list, I will need this on my home screen to get Alta's weather
+- then we simply return the html with the called api data
+
+### Login
+- login has 5 js files,  a AuthState class, and 4 components.
+- it has a login component that will either create a Authenticated Component, Unauthenticated component, or display some simple text depending on the AuthState
+- authenticate component gives two options in html to either go to play or logout
+- logout was passed in as a property from login.jsx which calls onAuthChange which was passed in as a prop from app.jsx which changes the auth state and the user state. this makes sense as the user and auth state are used throughout the entire app, whereas some states are only used on certain pages
+- unauthenticated component contains the html and functions to actually login
+
+### Play
+- play has a game notifier.js file which handles the websocket
+- it has a short delay function in delay.js
+- it has a play component which returns two components players and simongame
+- players handles the receiving of messages
+- simon game handles the actual game and sending the messages
+  - a lot of the code is the same within the game, except that the buttons are being handled by React Refs
+  - all the small functions are not changed, only functions that deal with the input of the user and output. Also, variables that belong to the component / class are now states
+
+
+### Scores
+- this code utilizes a JSX template of a table
+- it has one state of scores
+- it has a one time fetch for scores using useEffect, I will likely need to do this whenever a challenge is checked in my app
+- it renders an array once everytime scores is loaded
