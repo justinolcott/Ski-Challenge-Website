@@ -1688,3 +1688,62 @@ Finally, we remove the references to reportWebVitals from index.js since that pa
 If you want to strip the project down even more, you can also delete the robots.txt, manifest.json, and the logo*.png files.
 
 - from my own tinkering, I found the React CLI of npm very nice. It is extremely easy to start an app and insert my own components, styling, etc and then start the app in a development environment as well as then exporting it to a production environment.
+
+## React Router Notes
+- we can use react router to handle different pages, but in reality we aren't actually changing pages
+- In order to use React Router on the web you need to run npm i react-router-dom to install React Router. 
+- Once you have this library there are three things you need to do in order to use React Router.
+
+Setup your router
+Define your routes
+Handle navigation
+
+- an example: 
+```
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/books" element={<BookList />} />
+  <Route path="/books/:id" element={<Book />} />
+</Routes>
+```
+
+```
+import { useParams } from "react-router-dom"
+
+export function Book() {
+  const { id } = useParams()
+
+  return (
+    <h1>Book {id}</h1>
+  )
+}
+```
+
+- another example:
+```
+// Inject the router into the application root DOM element
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // BrowserRouter component that controls what is rendered
+  // NavLink component captures user navigation requests
+  // Routes component defines what component is routed to
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</Link>
+        <NavLink to='/about'>About</Link>
+        <NavLink to='/users'>Users</Link>
+      </nav>
+
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+```
