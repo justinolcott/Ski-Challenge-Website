@@ -9,8 +9,14 @@ class Challenge {
 }
 class MyWebSocket {
   constructor() {
+    
+    let port = window.location.port;
+    if (process.env.NODE_ENV !== 'production') {
+      port = 3000;
+    }
+
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
     this.socket.onopen = (event) => {
       //this.displayMsg('system', 'connected');
     };
