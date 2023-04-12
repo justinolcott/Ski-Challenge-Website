@@ -1,0 +1,9 @@
+.carousel-item img {
+    max-height: 80vh; /* Set the maximum height for carousel images */
+    width: auto; /* Ensure the images maintain their aspect ratio */
+}
+
+#weather-alert {
+    background-color: #343a40;
+    color: #fff;
+}
