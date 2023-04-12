@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 import { Carousel, Alert } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 export function Home() {
   const [weatherData, setWeatherData] = useState("");
@@ -28,7 +29,7 @@ export function Home() {
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>
             <div>
-              <a href="login.html"><button type="button" className="btn btn-primary">Sign In</button></a>
+              <NavLink to="/login"><button type="button" className="btn btn-primary">Sign In</button></NavLink>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -38,7 +39,7 @@ export function Home() {
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>
             <div>
-              <a href="login.html"><button type="button" className="btn btn-primary">Sign In</button></a>
+              <NavLink to="/login"><button type="button" className="btn btn-primary">Sign In</button></NavLink>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -48,7 +49,7 @@ export function Home() {
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>
             <div>
-              <a href="login.html"><button type="button" className="btn btn-primary">Sign In</button></a>
+              <NavLink to="/login"><button type="button" className="btn btn-primary">Sign In</button></NavLink>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

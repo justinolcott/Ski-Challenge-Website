@@ -11,7 +11,7 @@ header a {
 
 .login-main {
   min-height: 90vh;
-  background-image: url('assets/images/skiing_background.jpg');
+  background-image: url('/public/assets/images/clouds_background.jpg');
   height: 100vh;
 }
 
@@ -26,14 +26,16 @@ header a {
   overflow: hidden;
 }
 
-.challenges-box {
-  border-radius: 10px;
-}
-
 .login-wrapper {
   margin: 0;
   position: center;
 }
+
+.challenges-box {
+  border-radius: 10px;
+}
+
+
 
 footer {
   font-family: 'Gloock', serif;

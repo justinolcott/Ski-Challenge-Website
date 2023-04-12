@@ -7,8 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavItem, NavLink } from 'react-bootstrap';
 import { Link , Route, Routes, useNavigate } from 'react-router-dom';
 
-import { AuthState } from './authState';
+import { AuthState } from './login/authState.js';
 import { Home } from './home/home.jsx';
+import { Login } from './login/login';
 
 function App() {
   const [userName] = React.useState(localStorage.getItem('userName') || '');
@@ -56,7 +57,9 @@ function App() {
                             <NavLink as={Link} to="" exact>Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink as={Link} to="/login">Sign-in</NavLink>
+                            {authState === AuthState.Unauthenticated && (
+                              <NavLink as={Link} to="/login">Sign-in</NavLink>
+                            )}
                         </NavItem>
                         <NavItem>
                             {authState === AuthState.Authenticated && (
@@ -81,10 +84,11 @@ function App() {
             element={<Home /> }
             exact
           />
+          <Route path='/login' element={<Login />} />
+          <Route path='*' element={<NotFound />} />
           {/* <Route path='/play' element={<Play userName={userName} />} />
           <Route path='/scores' element={<Scores />} />
           <Route path='/about' element={<About />} /> */}
-          <Route path='*' element={<NotFound />} />
         </Routes> 
         </main>
 
