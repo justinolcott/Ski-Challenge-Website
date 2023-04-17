@@ -8,7 +8,7 @@ import './login.css';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function Login() {
+export function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -34,6 +34,7 @@ export function Login() {
       
         if (response.status === 200) {
           localStorage.setItem('userName', username);
+          props.setAuthState(AuthState.Authenticated);
           navigate('/challenges');
         } else {
           console.log('Error logging in');
@@ -54,6 +55,8 @@ export function Login() {
       
         if (response.status === 200) {
           localStorage.setItem('userName', username);
+          props.setAuthState(AuthState.Authenticated);
+
           navigate('/challenges');
         } else {
           console.log('Error creating user');

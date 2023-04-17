@@ -10,6 +10,8 @@ import { Link , Route, Routes, useNavigate } from 'react-router-dom';
 import { AuthState } from './login/authState.js';
 import { Home } from './home/home.jsx';
 import { Login } from './login/login';
+import { ChallengesScreen } from './challenges/challenges';
+import { CreateChallenge } from './create-challenge/createChallenge';
 
 function App() {
   const [userName] = React.useState(localStorage.getItem('userName') || '');
@@ -43,9 +45,9 @@ function App() {
 
   return (
     <div className="App">
-      <body className='bg-dark'>
+      <div className='bg-dark' id="body">
         <header className="p-0">
-            <Navbar bg="dark" variant="dark" expand="lg" id="navbar" fluid>
+            <Navbar bg="dark" variant="dark" expand="lg" id="navbar" fluid="true">
                 <Link to="/" className="navbar-brand">
                     <img src={logo} width="30" height="30" className="d-inline-block align-top" alt="" />
                     NINTH HEAVEN
@@ -54,7 +56,7 @@ function App() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto text-light">
                         <NavItem>
-                            <NavLink as={Link} to="" exact>Home</NavLink>
+                            <NavLink as={Link} to="" exact="true">Home</NavLink>
                         </NavItem>
                         <NavItem>
                             {authState === AuthState.Unauthenticated && (
@@ -81,14 +83,13 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Home /> }
-            exact
+            element={<Home authState={authState}/> }
+            exact="true"
           />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login setAuthState={setAuthState}/>} />
           <Route path='*' element={<NotFound />} />
-          {/* <Route path='/play' element={<Play userName={userName} />} />
-          <Route path='/scores' element={<Scores />} />
-          <Route path='/about' element={<About />} /> */}
+          <Route path='/challenges' element={<ChallengesScreen />} />
+          <Route path='/create-challenge' element={<CreateChallenge />} />
         </Routes> 
         </main>
 
@@ -98,7 +99,7 @@ function App() {
               <span className="float-right"><a className="link-secondary" href="https://github.com/justinolcott/startup">Github Repo</a></span>
           </div>
         </footer>
-        </body>
+        </div>
     </div>
   );
 }

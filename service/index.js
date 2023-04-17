@@ -43,7 +43,7 @@ apiRouter.post('/auth/login', async (req, res) => {
         return;
         }
     }
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ msg: 'oog booga' });
 });
 
 apiRouter.delete('/auth/logout', (_req, res) => {
@@ -143,11 +143,11 @@ function setAuthCookie(res, authToken) {
     });
   }
 
-const httpService = app.listen(port, '0.0.0.0', () => {
-    console.log(`Listening on port ${port}`);
-});
-
-// const httpService = app.listen(port, () => {
-//   console.log(`Listening on port ${port}`);
+// const httpService = app.listen(port, '0.0.0.0', () => {
+//     console.log(`Listening on port ${port}`);
 // });
+
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 new PeerProxy(httpService);
