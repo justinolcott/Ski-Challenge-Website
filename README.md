@@ -1808,4 +1808,4 @@ root.render(
 # Notes for Final Startup
 - To start using React, we do not need to change the server side code at all which includes the serverProxy and the database.
 - Then we start with a fresh React app and make small changes and don't break it
-- the essential parts
+- We start with the index.jsx which essentially houses a 
