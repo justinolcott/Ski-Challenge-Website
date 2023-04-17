@@ -49,7 +49,7 @@ function App() {
         <header className="p-0">
             <Navbar bg="dark" variant="dark" expand="lg" id="navbar" fluid="true">
                 <Link to="/" className="navbar-brand">
-                    <img src="public/assets/images/logo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+                    <img src="assets/images/logo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
                     NINTH HEAVEN
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

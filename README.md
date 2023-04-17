@@ -1820,6 +1820,10 @@ root.render(
 - The code in my challenges was way simpler because I could have the parent element hold the data for the child elements and when a child element would change the data, it would reload all the dependent children.
 - the useEffect also made it very easy to initially get the challenges from the server
 - the useEffect could also be used for automatically updating variables in the database when they're updated locally.
+- the websocket was easy to implement as well, essentially you export an instance of the websocket and then in the receiver, you add it as a handler and then in the sender, you simply import the notifier and broadcast a message
+- I really like React because it is a more logical, clean way of creating a web app. It also makes it more efficient to run like not having to reload everything on each new page. 
+- I enjoyed the different components because for me it made it very OOP which feels natural to me. It also made using Bootstrap easier too! I ran into a ton of errors with Bootstrap at the beginning, but implementing them in React was extremely easy.
+- The best example of React in my app is on the challenges page because it houses 4 different components. 1 for the alerts, 2 for the scoreboard, 3 for the challenge list, and 4 for the completed challenges. These components interact with each other as children and React made it very easy for everything to change.
 
 
 
