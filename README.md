@@ -1808,4 +1808,23 @@ root.render(
 # Notes for Final Startup
 - To start using React, we do not need to change the server side code at all which includes the serverProxy and the database.
 - Then we start with a fresh React app and make small changes and don't break it
-- We start with the index.jsx which essentially houses a 
+- When I start with create app, it does a lot of background stuff including Babel, so then when I run npm run build, or when the script does, it bundles the code up to make it all more efficient
+- We start with the index.jsx which essentially houses a Browser Router component which has an app component
+- the app component does a lot of heavy lifting.
+  - it handles the navigation in the app, the header, and footer.
+  - it also deals with the authentification
+  - it also does a useEffect to check for previous authentification using a fetch to the server with the localStorage username
+- in login, we essentially make the calls and change the authState back in app
+- for home, I just had to include bootstrap, and it works with the previous code, but I switched out the bootstrap elements for bootstrap components
+  - in home, I have a useEffect with no dependency to fetch the weather at Alta using an api.
+- The code in my challenges was way simpler because I could have the parent element hold the data for the child elements and when a child element would change the data, it would reload all the dependent children.
+- the useEffect also made it very easy to initially get the challenges from the server
+- the useEffect could also be used for automatically updating variables in the database when they're updated locally.
+
+
+
+# Final Notes
+- port 80 is reserved for HTTP, SSH is 22, 
+- know useEffect in React and the sequence of outputs
+- know mongodb query ex, and or case sensitive less than, etc, etc
+- HTTP status codes in 300 are for content redirects or caching
