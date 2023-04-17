@@ -2,7 +2,7 @@ import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Challenge } from './challenge';
+import { Challenge } from './challenge.jsx';
 import { Button } from "react-bootstrap";
 
 export function ChallengeList({ challenges = [], onCompleteChallenge, onUncompleteChallenge, addNewChallenge }) {

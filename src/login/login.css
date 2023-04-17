@@ -1,6 +1,6 @@
 .login-main {
     max-height: 88vh;
-    background-image: url('/public/assets/images/skiing_background.jpg');
+    background-image: url('../../public/assets/images/skiing_background.jpg');
     background-size: cover; /* Scales the background image to cover the entire element */
     background-position: center; /* Centers the background image within the element */
     height: 100vh;

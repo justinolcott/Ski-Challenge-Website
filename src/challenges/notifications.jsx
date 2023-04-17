@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
-import { GameNotifier } from "./myWebSocket";
+import { GameNotifier } from "./myWebSocket.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function Notifier() {

@@ -25,7 +25,7 @@ export function Home({authState}) {
 
       <Carousel id="carouselExampleIndicators" className="index-main" style={{maxHeight: "80vh"}}>
         <Carousel.Item >
-          <img className="d-block w-100" src="assets/images/skiing_background.jpg" alt="First slide" />
+          <img className="d-block w-100" src="public/assets/images/skiing_background.jpg" alt="First slide" />
           <Carousel.Caption className="d-flex flex-column justify-content-center h-100 text-dark">
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>
@@ -40,7 +40,7 @@ export function Home({authState}) {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src="assets/images/mountains_background.jpg" alt="Second slide" />
+          <img className="d-block w-100" src="public/assets/images/mountains_background.jpg" alt="Second slide" />
           <Carousel.Caption className="d-flex flex-column justify-content-center h-100 text-dark">
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>
@@ -55,7 +55,7 @@ export function Home({authState}) {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src="assets/images/groomer_background.jpg" alt="Third slide" />
+          <img className="d-block w-100" src="public/assets/images/groomer_background.jpg" alt="Third slide" />
           <Carousel.Caption className="d-flex flex-column justify-content-center h-100 text-dark">
             <h2>Skiing Reimagined</h2>
             <h5>Create an account and check out new challenges!</h5>

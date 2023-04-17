@@ -9,9 +9,9 @@ import { Link , Route, Routes, useNavigate } from 'react-router-dom';
 
 import { AuthState } from './login/authState.js';
 import { Home } from './home/home.jsx';
-import { Login } from './login/login';
-import { ChallengesScreen } from './challenges/challenges';
-import { CreateChallenge } from './create-challenge/createChallenge';
+import { Login } from './login/login.jsx';
+import { ChallengesScreen } from './challenges/challenges.jsx';
+import { CreateChallenge } from './create-challenge/createChallenge.jsx';
 
 function App() {
   const [userName] = React.useState(localStorage.getItem('userName') || '');
@@ -49,7 +49,7 @@ function App() {
         <header className="p-0">
             <Navbar bg="dark" variant="dark" expand="lg" id="navbar" fluid="true">
                 <Link to="/" className="navbar-brand">
-                    <img src={logo} width="30" height="30" className="d-inline-block align-top" alt="" />
+                    <img src="public/assets/images/logo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
                     NINTH HEAVEN
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

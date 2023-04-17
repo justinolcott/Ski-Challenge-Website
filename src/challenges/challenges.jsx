@@ -6,11 +6,11 @@ import { Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './challenges.css';
 
-import { Scoreboard } from './scoreboard';
-import { ChallengeList } from './challengeList';
-import { CompletedChallenges } from './completedChallenges';
-import { GameNotifier } from './myWebSocket';
-import { Notifier } from './notifications';
+import { Scoreboard } from './scoreboard.jsx';
+import { ChallengeList } from './challengeList.jsx';
+import { CompletedChallenges } from './completedChallenges.jsx';
+import { GameNotifier } from './myWebSocket.js';
+import { Notifier } from './notifications.jsx';
 
 export function ChallengesScreen() {
     const [scoreboard, setScoreboard] = useState([]); //delete
