@@ -1804,3 +1804,8 @@ root.render(
 - it has one state of scores
 - it has a one time fetch for scores using useEffect, I will likely need to do this whenever a challenge is checked in my app
 - it renders an array once everytime scores is loaded
+
+# Notes for Final Startup
+- To start using React, we do not need to change the server side code at all which includes the serverProxy and the database.
+- Then we start with a fresh React app and make small changes and don't break it
+- the essential parts
