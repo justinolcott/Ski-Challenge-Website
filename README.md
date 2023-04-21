@@ -1825,6 +1825,190 @@ root.render(
 - I enjoyed the different components because for me it made it very OOP which feels natural to me. It also made using Bootstrap easier too! I ran into a ton of errors with Bootstrap at the beginning, but implementing them in React was extremely easy.
 - The best example of React in my app is on the challenges page because it houses 4 different components. 1 for the alerts, 2 for the scoreboard, 3 for the challenge list, and 4 for the completed challenges. These components interact with each other as children and React made it very easy for everything to change.
 
+### Security
+Hacking - The process of making a system do something it's not supposed to do.
+Exploit - Code or input that takes advantage of a programming or configuration flaw.
+Attack Vector - The method that a hacker employs to penetrate and exploit a system.
+Attack Surface - The exposed parts of a system that an attacker can access. For example, open ports (22, 443, 80), service endpoints, or user accounts.
+Attack Payload - The actual code, or data, that a hacker delivers to a system in order to exploit it.
+Input sanitization - "Cleaning" any input of potentially malicious data.
+Black box testing - Testing an application without knowledge of the internals of the application.
+White box testing - Testing an application by with knowledge of the source code and internal infrastructure.
+Penetration Testing - Attempting to gain access to, or exploit, a system in ways that are not anticipated by the developers.
+Mitigation - The action taken to remove, or reduce, a threat.
+
+The following lists some common motivations at drives a system attack.
+
+Disruption - By overloading a system, encrypting essential data, or deleting critical infrastructure, an attacker can destroy normal business operations. This may be an attempt at extortion, or simply be an attempt to punish a business that that attacker does not agree with.
+Data exfiltration - By privately extracting, or publicly exposing, a system's data, an attacker can embarrass the company, exploit insider information, sell the information to competitors, or leverage the information for additional attacks.
+Resource consumption - By taking control of a company's computing resources an attacker can use it for other purposes such as mining cryptocurrency, gathering customer information, or attacking other systems.
+
+There are a few common exploitation techniques that you should be aware of. These include the following.
+
+Injection: When an application interacts with a database on the backend, a programmer will often take user input and concatenate it directly into a search query. This allows a hacker can use a specially crafted query to make the database reveal hidden information or even delete the database.
+
+Cross-Site Scripting (XSS): A category of attacks where an attacker can make malicious code execute on a different user's browser. If successful, an attacker can turn a website that a user trusts, into one that can steal passwords and hijack a user's account.
+
+Denial of Service: This includes any attack where the main goal is to render any service inaccessible. This can be done by deleting a database using an SQL injection, by sending unexpected data to a service endpoint that causes the program to crash, or by simply making more requests than a server can handle.
+
+Credential Stuffing: People have a tendency to reuse passwords or variations of passwords on different websites. If a hacker has a user's credentials from a previous website attack, then there is a good chance that they can successfully use those credentials on a different website. A hacker can also try to brute force attack a system by trying every possible combination of password.
+
+Social engineering - Appealing to a human's desire to help, in order to gain unauthorized access or information.
+
+What you can do about it: 
+Taking the time to learn the techniques a hacker uses to attack a system is the first step in preventing them from exploiting your systems. From there, develop a security mindset, where you always assume any attack surface will be used against you. Make security a consistent part of your application design and feature discussions. Here is a list of common security practices you should include in your applications.
+
+Sanitize input data - Always assume that any data you receive from outside your system will be used to exploit your system. Consider if the input data can be turned into an executable expression, or can overload computing, bandwidth, or storage resources.
+Logging - It is not possible to think of every way that your system can be exploited, but you can create an immutable log of requests that will expose when a system is being exploited. You can then trigger alerts, and periodically review the logs for unexpected activity.
+Traps - Create what appears to be valuable information and then trigger alarms when the data is accessed.
+Educate - Teach yourself, your users, and everyone you work with, to be security minded. Anyone who has access to your system should understand how to prevent physical, social, and software attacks.
+Reduce attack surfaces - Do not open access anymore than is necessary to properly provide your application. This includes what network ports are open, what account privileges are allowed, where you can access the system from, and what endpoints are available.
+Layered security - Do not assume that one safeguard is enough. Create multiple layers of security that each take different approaches. For example, secure your physical environment, secure your network, secure your server, secure your public network traffic, secure your private network traffic, encrypt your storage, separate your production systems from your development systems, put your payment information in a separate environment from your application environment. Do not allow data from one layer to move to other layers. For example, do not allow an employee to take data out of the production system.
+Least required access policy - Do not give any one user all the credentials necessary to control the entire system. Only give a user what access they need to do the work they are required to do.
+Safeguard credentials - Do not store credentials in accessible locations such as a public GitHub repository or a sticky note taped to a monitor. Automatically rotate credentials in order to limit the impact of an exposure. Only award credentials that are necessary to do a specific task.
+Public review - Do not rely on obscurity to keep your system safe. Assume instead that an attacker knows everything about your system and then make it difficult for anyone to exploit the system. If you can attack your system, then a hacker will be able to also. By soliciting public review and the work of 
+external penetration testers, you will be able to discover and remove potential exploits.
+
+### OWASP
+- A01 Broken Access Control
+Mitigations include:
+
+Strict access enforcement at the service level
+Clearly defined roles and elevation paths
+- A02 Cryptographic Failures
+Mitigations include:
+
+Use strong encryption for all data. This includes external, internal, in transit, and at rest data.
+Updating encryption algorithms as older algorithms become compromised.
+Properly using cryptographic safeguards.
+
+- A03
+Mitigations include:
+
+Sanitizing input
+Use database prepared statements
+Restricting execution rights
+Limit output
+
+- A04 Insecure Design
+Mitigations include:
+
+Integration testing
+Strict access control
+Security education
+Security design pattern usages
+Scenario reviews
+
+- A05 Security Misconfiguration
+Mitigations include:
+
+Configuration reviews
+Setting defaults to disable all access
+Automated configuration audits
+Requiring multiple layers of access for remote configuration
+
+- A06 Vulnerable and Outdated Components
+Mitigations include:
+
+Keeping a manifest of your software stack including versions
+Reviewing security bulletins
+Regularly updating software
+Required components to be up to date
+Replacing unsupported software
+
+- A07 Identification and Authentification Failures
+Mitigations include:
+
+Rate limiting requests
+Properly managing credentials
+Multifactor authentication
+Authentication recovery
+
+- A08
+Mitigations include:
+
+Only using trusted package repositories
+Using your own private vetted repository
+Audit all updates to third party packages and data sources
+
+- A09
+Mitigations include:
+
+Real time log processing
+Automated alerts for metric threshold violations
+Periodic log reviews
+Visual dashboards for key indicators
+
+- A10 Server Side Request Forgery
+Mitigations include:
+
+Sanitizing returned data
+Not returning data
+Whitelisting accessible domains
+Rejecting HTTP redirects
+
+### Typescript
+- an example of a React component using typescript
+```
+export class About extends React.Component {
+  state: {
+    imageUrl: string;
+    quote: string;
+    price: number;
+  };
+
+  constructor(props: { price: number }) {
+    super(props);
+
+    this.state = {
+      imageUrl: '',
+      quote: 'loading...',
+      price: props.price,
+    };
+  }
+}
+```
+- we can use interfaces for objects
+```
+interface Book {
+  title: string;
+  id: number;
+}
+```
+- coercing type and null checking
+```
+const containerEl = document.querySelector<HTMLElement>('#picture');
+if (containerEl) {
+  const width = containerEl.offsetWidth;
+}
+```
+- unions
+```
+type AuthState = 'unknown' | 'authenticated' | 'unauthenticated';
+
+let auth: AuthState = 'authenticated';
+```
+```
+function square(n: number | string) {
+  if (typeof n === 'string') {
+    console.log(`{$n}^2`);
+  } else {
+    console.log(n * n);
+  }
+}
+```
+### Performance Monitoring
+- you can use a lot of tools to see how fast your website loads
+
+### SEO
+There are several factors that are major contributors to your search rank. These include:
+
+Content
+Authoritative links
+Structure and organization
+Metadata
+Performance and usability
+
 
 
 # Final Notes
@@ -1832,3 +2016,9 @@ root.render(
 - know useEffect in React and the sequence of outputs
 - know mongodb query ex, and or case sensitive less than, etc, etc
 - HTTP status codes in 300 are for content redirects or caching
+- Content-Type, Host, Cookie, but not language are standard http headers
+- cookies allow for a server to store data on the client
+- What value does WebSocket add to HTTP? It is peer to peer instead of client to server
+- JSX does not include CSS
+- useEffect is triggered initially
+- 
