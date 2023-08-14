@@ -1,6 +1,7 @@
 # Ski Challenge Website
 - You can find the website [here](https://startup.ninthheaven.link/).
 - The website is built for skiers to create and track challenges achieved while skiing and then displays a leaderboard of the top performers.
+- It is built using React, Node, Express, MongoDB, and Bootstrap.
 
 
 
