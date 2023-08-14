@@ -8,8 +8,6 @@
 # CS 260
 - I made this website for CS 260, so the following includes information for the class, which is mostly notes.
 
-
-# CS 260
 ## Notes
 ### Github Notes - 23 Jan 2023
 I learned how to use git and github together either through the terminal or vs code. I also learned how to merge conflicts and the basics of git. I personally prefer doing everything through vs code with GitLens.
